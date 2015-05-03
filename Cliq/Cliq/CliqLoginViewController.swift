@@ -7,7 +7,8 @@ class CliqLoginViewController : UIViewController {
         let logInViewController = PFLogInViewController()
         logInViewController.facebookPermissions = ["friends_about_me"]
         logInViewController.fields = .Facebook
-        
+        logInViewController.logInView?.logo = UIImageView(image: UIImage(named: "cliq_logo.png")!)
+        logInViewController.logInView?.facebookButton
         self.presentViewController(logInViewController, animated: true, completion: nil)
     }
 }
