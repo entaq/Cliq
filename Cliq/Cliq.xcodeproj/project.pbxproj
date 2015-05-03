@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3259746FA5EA7EFC624D44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC56016E2A88643B0595D66 /* libPods.a */; };
 		F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */; };
-		F4CABB0C1AF6CFB80059A1A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB0B1AF6CFB80059A1A7 /* ViewController.swift */; };
+		F4CABB0C1AF6CFB80059A1A7 /* CliqLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB0B1AF6CFB80059A1A7 /* CliqLoginViewController.swift */; };
 		F4CABB0F1AF6CFB80059A1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB0D1AF6CFB80059A1A7 /* Main.storyboard */; };
 		F4CABB111AF6CFB80059A1A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB101AF6CFB80059A1A7 /* Images.xcassets */; };
 		F4CABB141AF6CFB80059A1A7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB121AF6CFB80059A1A7 /* LaunchScreen.xib */; };
@@ -26,10 +27,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5EA9BB17B9E9E29FD8B1F448 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		66847187CA27E94849DB334A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		ABC56016E2A88643B0595D66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F48F25031AF6D52A00562863 /* Cliq-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cliq-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4CABB041AF6CFB80059A1A7 /* Cliq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cliq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CABB081AF6CFB80059A1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4CABB0B1AF6CFB80059A1A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F4CABB0B1AF6CFB80059A1A7 /* CliqLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqLoginViewController.swift; sourceTree = "<group>"; };
 		F4CABB0E1AF6CFB80059A1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4CABB101AF6CFB80059A1A7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F4CABB131AF6CFB80059A1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D3259746FA5EA7EFC624D44 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +62,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4605810D39F6D0C34D249BBB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66847187CA27E94849DB334A /* Pods.debug.xcconfig */,
+				5EA9BB17B9E9E29FD8B1F448 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		96CD99C1B1029AD0C54E518D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABC56016E2A88643B0595D66 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F4CABAFB1AF6CFB80059A1A7 = {
 			isa = PBXGroup;
 			children = (
 				F4CABB061AF6CFB80059A1A7 /* Cliq */,
 				F4CABB1C1AF6CFB80059A1A7 /* CliqTests */,
 				F4CABB051AF6CFB80059A1A7 /* Products */,
+				4605810D39F6D0C34D249BBB /* Pods */,
+				96CD99C1B1029AD0C54E518D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */,
-				F4CABB0B1AF6CFB80059A1A7 /* ViewController.swift */,
+				F4CABB0B1AF6CFB80059A1A7 /* CliqLoginViewController.swift */,
 				F4CABB0D1AF6CFB80059A1A7 /* Main.storyboard */,
 				F4CABB101AF6CFB80059A1A7 /* Images.xcassets */,
 				F4CABB121AF6CFB80059A1A7 /* LaunchScreen.xib */,
@@ -91,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				F4CABB081AF6CFB80059A1A7 /* Info.plist */,
+				F48F25031AF6D52A00562863 /* Cliq-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -119,9 +145,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4CABB231AF6CFB80059A1A7 /* Build configuration list for PBXNativeTarget "Cliq" */;
 			buildPhases = (
+				388ED7549B24CDC0192398E1 /* Check Pods Manifest.lock */,
 				F4CABB001AF6CFB80059A1A7 /* Sources */,
 				F4CABB011AF6CFB80059A1A7 /* Frameworks */,
 				F4CABB021AF6CFB80059A1A7 /* Resources */,
+				A63A308B0CAA19BC446B112F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,12 +235,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		388ED7549B24CDC0192398E1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A63A308B0CAA19BC446B112F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F4CABB001AF6CFB80059A1A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4CABB0C1AF6CFB80059A1A7 /* ViewController.swift in Sources */,
+				F4CABB0C1AF6CFB80059A1A7 /* CliqLoginViewController.swift in Sources */,
 				F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,21 +401,28 @@
 		};
 		F4CABB241AF6CFB80059A1A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66847187CA27E94849DB334A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Cliq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Cliq/Cliq-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F4CABB251AF6CFB80059A1A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EA9BB17B9E9E29FD8B1F448 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Cliq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Cliq/Cliq-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -411,6 +479,7 @@
 				F4CABB251AF6CFB80059A1A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4CABB261AF6CFB80059A1A7 /* Build configuration list for PBXNativeTarget "CliqTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +488,7 @@
 				F4CABB281AF6CFB80059A1A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
