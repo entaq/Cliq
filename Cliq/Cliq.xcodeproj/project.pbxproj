@@ -10,7 +10,7 @@
 		0D3259746FA5EA7EFC624D44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC56016E2A88643B0595D66 /* libPods.a */; };
 		F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F25061AF6E8EF00562863 /* cliq_logo.png */; };
 		F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */; };
-		F4CABB0C1AF6CFB80059A1A7 /* CliqLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB0B1AF6CFB80059A1A7 /* CliqLoginViewController.swift */; };
+		F4CABB0C1AF6CFB80059A1A7 /* CliqHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */; };
 		F4CABB0F1AF6CFB80059A1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB0D1AF6CFB80059A1A7 /* Main.storyboard */; };
 		F4CABB111AF6CFB80059A1A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB101AF6CFB80059A1A7 /* Images.xcassets */; };
 		F4CABB141AF6CFB80059A1A7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB121AF6CFB80059A1A7 /* LaunchScreen.xib */; };
@@ -36,7 +36,7 @@
 		F4CABB041AF6CFB80059A1A7 /* Cliq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cliq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CABB081AF6CFB80059A1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4CABB0B1AF6CFB80059A1A7 /* CliqLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqLoginViewController.swift; sourceTree = "<group>"; };
+		F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqHomeViewController.swift; sourceTree = "<group>"; };
 		F4CABB0E1AF6CFB80059A1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4CABB101AF6CFB80059A1A7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F4CABB131AF6CFB80059A1A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			children = (
 				F48F25061AF6E8EF00562863 /* cliq_logo.png */,
 				F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */,
-				F4CABB0B1AF6CFB80059A1A7 /* CliqLoginViewController.swift */,
+				F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */,
 				F4CABB0D1AF6CFB80059A1A7 /* Main.storyboard */,
 				F4CABB101AF6CFB80059A1A7 /* Images.xcassets */,
 				F4CABB121AF6CFB80059A1A7 /* LaunchScreen.xib */,
@@ -277,7 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4CABB0C1AF6CFB80059A1A7 /* CliqLoginViewController.swift in Sources */,
+				F4CABB0C1AF6CFB80059A1A7 /* CliqHomeViewController.swift in Sources */,
 				F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
