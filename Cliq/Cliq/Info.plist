@@ -8,6 +8,8 @@
 	<string>382465115264739</string>
 	<key>FacebookDisplayName</key>
 	<string>Cliq</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We rely on your location to allow you to create and join a Cliq.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
