@@ -1,10 +1,12 @@
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        GMSServices.provideAPIKey("AIzaSyARWlypKPlMgxJDCgTJZUEGRVUxAtAm1qo")
         Parse.setApplicationId("a1PPRqrWNi69aExmxnkCNmRabf13nMoWeduYY3SB", clientKey: "dKEPhkmMHpkQWy2Fo3M7d0tdvNirhzbU5StL3Adu")
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
 

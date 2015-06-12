@@ -1,4 +1,5 @@
 import UIKit
+import GoogleMaps
 
 class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
     override func viewDidAppear(animated: Bool) {
@@ -35,6 +36,35 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
         } else {
             showLoginScreen()
         }
+    }
+
+    var placePicker: GMSPlacePicker?
+
+    @IBAction func startCliq(sender: UIBarButtonItem) {
+        PFGeoPoint.geoPointForCurrentLocationInBackground { (geopoint, error) -> Void in
+            let center = CLLocationCoordinate2DMake(geopoint!.latitude, geopoint!.longitude)
+            let northEast = CLLocationCoordinate2DMake(center.latitude + 0.001, center.longitude + 0.001)
+            let southWest = CLLocationCoordinate2DMake(center.latitude - 0.001, center.longitude - 0.001)
+            let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+            let config = GMSPlacePickerConfig(viewport: viewport)
+            self.placePicker = GMSPlacePicker(config: config)
+
+            self.placePicker?.pickPlaceWithCallback({ (place: GMSPlace?, error: NSError?) -> Void in
+                if let error = error {
+                    println("Pick Place error: \(error.localizedDescription)")
+                    return
+                }
+
+                if let place = place {
+                    println(place.name)
+                    println("\n".join(place.formattedAddress.componentsSeparatedByString(", ")))
+                } else {
+                    println("No place selected")
+                    println("")
+                }
+            })
+        }
+
     }
 
     func requestPushAuthorization() {
