@@ -39,6 +39,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     }
 
     var placePicker: GMSPlacePicker?
+    var cliqGroup : PFObject?
 
     @IBAction func startCliq(sender: UIBarButtonItem) {
         PFGeoPoint.geoPointForCurrentLocationInBackground { (geopoint, error) -> Void in
@@ -60,6 +61,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                     cliq["name"] = place.name
                     cliq["address"] = "\n".join(place.formattedAddress.componentsSeparatedByString(", "))
                     cliq.saveInBackground()
+                    self.cliqGroup = cliq
                 } else {
                     println("No place selected")
                     println("")
@@ -84,7 +86,10 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         let imageFile = PFFile(name:"image.jpeg", data:imageData)
 
         var userPhoto = PFObject(className:"UserPhoto")
-        userPhoto["userName"] = PFUser.currentUser()!.username!
+        userPhoto["creator"] = PFUser.currentUser()!
+        if let cliqGroup = cliqGroup {
+            userPhoto["cliqGroup"] = cliqGroup
+        }
         userPhoto["imageFile"] = imageFile
         userPhoto.saveInBackground()
         self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
