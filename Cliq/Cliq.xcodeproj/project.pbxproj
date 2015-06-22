@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0D3259746FA5EA7EFC624D44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC56016E2A88643B0595D66 /* libPods.a */; };
 		F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F25061AF6E8EF00562863 /* cliq_logo.png */; };
+		F4A367641B37BB3D000C83C4 /* CliqCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */; };
 		F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */; };
 		F4CABB0C1AF6CFB80059A1A7 /* CliqHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */; };
 		F4CABB0F1AF6CFB80059A1A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4CABB0D1AF6CFB80059A1A7 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		ABC56016E2A88643B0595D66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48F25031AF6D52A00562863 /* Cliq-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cliq-Bridging-Header.h"; sourceTree = "<group>"; };
 		F48F25061AF6E8EF00562863 /* cliq_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cliq_logo.png; sourceTree = "<group>"; };
+		F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CliqCreationViewController.swift; sourceTree = "<group>"; };
 		F4CABB041AF6CFB80059A1A7 /* Cliq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cliq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4CABB081AF6CFB80059A1A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		F4CABB061AF6CFB80059A1A7 /* Cliq */ = {
 			isa = PBXGroup;
 			children = (
+				F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */,
 				F48F25061AF6E8EF00562863 /* cliq_logo.png */,
 				F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */,
 				F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */,
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4CABB0C1AF6CFB80059A1A7 /* CliqHomeViewController.swift in Sources */,
+				F4A367641B37BB3D000C83C4 /* CliqCreationViewController.swift in Sources */,
 				F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

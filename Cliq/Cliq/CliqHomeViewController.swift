@@ -56,19 +56,12 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                     return
                 }
 
-                if let place = place {
-                    var cliq = PFObject(className:"CliqAlbum")
-                    cliq["name"] = place.name
-                    cliq["address"] = "\n".join(place.formattedAddress.componentsSeparatedByString(", "))
-                    cliq.saveInBackground()
-                    self.cliqGroup = cliq
-                } else {
-                    println("No place selected")
-                    println("")
-                }
+                var cliqCreationVC = self.storyboard?.instantiateViewControllerWithIdentifier("Create Cliq") as! CliqCreationViewController
+                cliqCreationVC.place = place
+
+                self.presentViewController(cliqCreationVC, animated: true, completion: nil)
             })
         }
-
     }
 
     @IBAction func uploadPhoto(sender: AnyObject) {
