@@ -6,7 +6,13 @@ mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 RESOURCES_TO_COPY=${PODS_ROOT}/resources-to-copy-${TARGETNAME}.txt
 > "$RESOURCES_TO_COPY"
 
-XCASSET_FILES=""
+XCASSET_FILES=()
+
+realpath() {
+  DIRECTORY=$(cd "${1%/*}" && pwd)
+  FILENAME="${1##*/}"
+  echo "$DIRECTORY/$FILENAME"
+}
 
 install_resource()
 {
@@ -38,7 +44,8 @@ install_resource()
       xcrun mapc "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename "$1" .xcmappingmodel`.cdm"
       ;;
     *.xcassets)
-      XCASSET_FILES="$XCASSET_FILES '${PODS_ROOT}/$1'"
+      ABSOLUTE_XCASSET_FILE=$(realpath "${PODS_ROOT}/$1")
+      XCASSET_FILES+=("$ABSOLUTE_XCASSET_FILE")
       ;;
     /*)
       echo "$1"
@@ -51,50 +58,10 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "DBCamera/DBCamera/Resources/DBCameraImages.xcassets"
-  install_resource "DBCamera/DBCamera/Localizations/en.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/es.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/it.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/pt.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/ru.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/sv-SE.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/tr.lproj"
-  install_resource "DBCamera/DBCamera/Filters/1977.acv"
-  install_resource "DBCamera/DBCamera/Filters/amaro.acv"
-  install_resource "DBCamera/DBCamera/Filters/Hudson.acv"
-  install_resource "DBCamera/DBCamera/Filters/mayfair.acv"
-  install_resource "DBCamera/DBCamera/Filters/Nashville.acv"
-  install_resource "DBCamera/DBCamera/Filters/Valencia.acv"
-  install_resource "DBCamera/DBCamera/Filters/Vignette.acv"
-  install_resource "GPUImage/framework/Resources/lookup.png"
-  install_resource "GPUImage/framework/Resources/lookup_amatorka.png"
-  install_resource "GPUImage/framework/Resources/lookup_miss_etikate.png"
-  install_resource "GPUImage/framework/Resources/lookup_soft_elegance_1.png"
-  install_resource "GPUImage/framework/Resources/lookup_soft_elegance_2.png"
   install_resource "GoogleMaps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"
   install_resource "ParseUI/ParseUI/Resources/Localization/en.lproj"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "DBCamera/DBCamera/Resources/DBCameraImages.xcassets"
-  install_resource "DBCamera/DBCamera/Localizations/en.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/es.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/it.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/pt.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/ru.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/sv-SE.lproj"
-  install_resource "DBCamera/DBCamera/Localizations/tr.lproj"
-  install_resource "DBCamera/DBCamera/Filters/1977.acv"
-  install_resource "DBCamera/DBCamera/Filters/amaro.acv"
-  install_resource "DBCamera/DBCamera/Filters/Hudson.acv"
-  install_resource "DBCamera/DBCamera/Filters/mayfair.acv"
-  install_resource "DBCamera/DBCamera/Filters/Nashville.acv"
-  install_resource "DBCamera/DBCamera/Filters/Valencia.acv"
-  install_resource "DBCamera/DBCamera/Filters/Vignette.acv"
-  install_resource "GPUImage/framework/Resources/lookup.png"
-  install_resource "GPUImage/framework/Resources/lookup_amatorka.png"
-  install_resource "GPUImage/framework/Resources/lookup_miss_etikate.png"
-  install_resource "GPUImage/framework/Resources/lookup_soft_elegance_1.png"
-  install_resource "GPUImage/framework/Resources/lookup_soft_elegance_2.png"
   install_resource "GoogleMaps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"
   install_resource "ParseUI/ParseUI/Resources/Localization/en.lproj"
 fi
@@ -121,6 +88,14 @@ then
       TARGET_DEVICE_ARGS="--target-device mac"
       ;;
   esac
-  while read line; do XCASSET_FILES="$XCASSET_FILES '$line'"; done <<<$(find "$PWD" -name "*.xcassets" | egrep -v "^$PODS_ROOT")
-  echo $XCASSET_FILES | xargs actool --output-format human-readable-text --notices --warnings --platform "${PLATFORM_NAME}" --minimum-deployment-target "${IPHONEOS_DEPLOYMENT_TARGET}" ${TARGET_DEVICE_ARGS} --compress-pngs --compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+
+  # Find all other xcassets (this unfortunately includes those of path pods and other targets).
+  OTHER_XCASSETS=$(find "$PWD" -iname "*.xcassets" -type d)
+  while read line; do
+    if [[ $line != "`realpath $PODS_ROOT`*" ]]; then
+      XCASSET_FILES+=("$line")
+    fi
+  done <<<"$OTHER_XCASSETS"
+
+  printf "%s\0" "${XCASSET_FILES[@]}" | xargs -0 xcrun actool --output-format human-readable-text --notices --warnings --platform "${PLATFORM_NAME}" --minimum-deployment-target "${IPHONEOS_DEPLOYMENT_TARGET}" ${TARGET_DEVICE_ARGS} --compress-pngs --compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 fi
