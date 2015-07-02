@@ -1,7 +1,7 @@
 import UIKit
 import GoogleMaps
 
-class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
+class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, UITableViewDataSource {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         checkAuthAndUpdateLocation()
@@ -23,6 +23,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
                             let fullname = result.valueForKey("name") as! String
                             currentUser["fullname"] = fullname
                             currentUser["location"] = geoPoint!
+                            self.loadPhotos()
                             currentUser.saveInBackground()
                         } else {
                             println("could not get geopoint \(error?.description)")
@@ -36,6 +37,41 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
         } else {
             showLoginScreen()
         }
+    }
+
+    var photos = [PFObject]()
+    @IBOutlet weak var tableView: UITableView!
+
+    func loadPhotos() {
+        var query = PFQuery(className: "UserPhoto")
+        query.orderByDescending("createdAt")
+
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+
+            if error == nil {
+                if let objects = objects as? [PFObject] {
+                    self.photos = objects
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return photos.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("photoCell") as! UITableViewCell
+
+        var imageView = cell.contentView.viewWithTag(10) as! PFImageView
+
+        imageView.file = photos[indexPath.row]["imageFile"] as? PFFile
+        imageView.loadInBackground { (_, _) -> Void in
+            cell.setNeedsLayout()
+        }
+
+        return cell
     }
 
     var placePicker: GMSPlacePicker?

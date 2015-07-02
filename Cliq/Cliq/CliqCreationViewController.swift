@@ -40,14 +40,12 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
 
     @IBAction func uploadPhoto(sender: AnyObject) {
         let authorization = PHPhotoLibrary.authorizationStatus()
-
         if authorization == .NotDetermined {
             PHPhotoLibrary.requestAuthorization() { status in
                 dispatch_async(dispatch_get_main_queue()) {
                     self.uploadPhoto(sender)
                 }
             }
-            
             return
         }
 
@@ -75,7 +73,19 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                 presentImagePickerController(.PhotoLibrary)
                 }, secondaryHandler: { _, numberOfPhotos in
                     controller.getSelectedImagesWithCompletion() { images in
-                        println("Send \(images) photos")
+                        for image in images {
+                            if let image = image {
+                                let imageData = UIImageJPEGRepresentation(image, 0.55)
+                                let imageFile = PFFile(name:"image.jpeg", data:imageData)
+                                var userPhoto = PFObject(className:"UserPhoto")
+                                userPhoto["creator"] = PFUser.currentUser()!
+                                if let cliqGroup = self.cliqGroup {
+                                    userPhoto["cliqGroup"] = cliqGroup
+                                }
+                                userPhoto["imageFile"] = imageFile
+                                userPhoto.saveInBackground()
+                            }
+                        }
                     }
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
@@ -89,22 +99,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
             alertView.show()
         }
     }
-
-//    func camera(cameraViewController: AnyObject!, didFinishWithImage image: UIImage!, withMetadata metadata: [NSObject : AnyObject]!) {
-//        let imageData = UIImageJPEGRepresentation(image, 0.55)
-//
-//        let imageFile = PFFile(name:"image.jpeg", data:imageData)
-//
-//        var userPhoto = PFObject(className:"UserPhoto")
-//        userPhoto["creator"] = PFUser.currentUser()!
-//        if let cliqGroup = cliqGroup {
-//            userPhoto["cliqGroup"] = cliqGroup
-//        }
-//        userPhoto["imageFile"] = imageFile
-//        userPhoto.saveInBackground()
-//        self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-//    }
-
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
