@@ -1,7 +1,7 @@
 import UIKit
 import GoogleMaps
 
-class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, DBCameraViewControllerDelegate {
+class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         checkAuthAndUpdateLocation()
@@ -62,34 +62,6 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                 self.presentViewController(cliqCreationVC, animated: true, completion: nil)
             })
         }
-    }
-
-    @IBAction func uploadPhoto(sender: AnyObject) {
-        var cameraContainer = DBCameraContainerViewController(delegate: self)
-        cameraContainer.setFullScreenMode()
-
-        var nav = UINavigationController(rootViewController: cameraContainer)
-        nav.setNavigationBarHidden(true, animated: true)
-        self.presentViewController(nav, animated: true, completion: nil)
-    }
-
-    func camera(cameraViewController: AnyObject!, didFinishWithImage image: UIImage!, withMetadata metadata: [NSObject : AnyObject]!) {
-        let imageData = UIImageJPEGRepresentation(image, 0.55)
-
-        let imageFile = PFFile(name:"image.jpeg", data:imageData)
-
-        var userPhoto = PFObject(className:"UserPhoto")
-        userPhoto["creator"] = PFUser.currentUser()!
-        if let cliqGroup = cliqGroup {
-            userPhoto["cliqGroup"] = cliqGroup
-        }
-        userPhoto["imageFile"] = imageFile
-        userPhoto.saveInBackground()
-        self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    func dismissCamera(cameraViewController: AnyObject!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func requestPushAuthorization() {
