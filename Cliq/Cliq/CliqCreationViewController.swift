@@ -1,9 +1,12 @@
 import UIKit
 import GoogleMaps
+import Photos
+//import ImagePickerSheetController
 
-class CliqCreationViewController: UIViewController, DBCameraViewControllerDelegate {
+class CliqCreationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var place: GMSPlace?
-
+    var cliqGroup: PFObject?
+    
     @IBOutlet weak var captionField: UITextField!
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var locationField: UILabel!
@@ -32,34 +35,77 @@ class CliqCreationViewController: UIViewController, DBCameraViewControllerDelega
         cliq["address"] = "\n".join(place!.formattedAddress.componentsSeparatedByString(", "))
         cliq["caption"] = self.captionField.text
         cliq.saveInBackground()
+        cliqGroup = cliq
     }
 
     @IBAction func uploadPhoto(sender: AnyObject) {
-        var cameraContainer = DBCameraContainerViewController(delegate: self)
-        cameraContainer.setFullScreenMode()
+        let authorization = PHPhotoLibrary.authorizationStatus()
 
-        var nav = UINavigationController(rootViewController: cameraContainer)
-        nav.setNavigationBarHidden(true, animated: true)
-        self.presentViewController(nav, animated: true, completion: nil)
-    }
-
-    func camera(cameraViewController: AnyObject!, didFinishWithImage image: UIImage!, withMetadata metadata: [NSObject : AnyObject]!) {
-        let imageData = UIImageJPEGRepresentation(image, 0.55)
-
-        let imageFile = PFFile(name:"image.jpeg", data:imageData)
-
-        var userPhoto = PFObject(className:"UserPhoto")
-        userPhoto["creator"] = PFUser.currentUser()!
-        if let cliqGroup = cliqGroup {
-            userPhoto["cliqGroup"] = cliqGroup
+        if authorization == .NotDetermined {
+            PHPhotoLibrary.requestAuthorization() { status in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.uploadPhoto(sender)
+                }
+            }
+            
+            return
         }
-        userPhoto["imageFile"] = imageFile
-        userPhoto.saveInBackground()
-        self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+
+        if authorization == .Authorized {
+            let presentImagePickerController: UIImagePickerControllerSourceType -> () = { source in
+                let controller = UIImagePickerController()
+                controller.delegate = self
+                var sourceType = source
+                if (!UIImagePickerController.isSourceTypeAvailable(sourceType)) {
+                    sourceType = .PhotoLibrary
+                    println("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
+                }
+                controller.sourceType = sourceType
+                
+                self.presentViewController(controller, animated: true, completion: nil)
+            }
+
+            let controller = ImagePickerSheetController()
+            controller.addAction(ImageAction(title: NSLocalizedString("Take Photo Or Video", comment: "Action Title"), secondaryTitle: NSLocalizedString("Add comment", comment: "Action Title"), handler: { _ in
+                presentImagePickerController(.Camera)
+                }, secondaryHandler: { _, numberOfPhotos in
+                    println("Comment \(numberOfPhotos) photos")
+            }))
+            controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("ImagePickerSheet.button1.Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
+                presentImagePickerController(.PhotoLibrary)
+                }, secondaryHandler: { _, numberOfPhotos in
+                    controller.getSelectedImagesWithCompletion() { images in
+                        println("Send \(images) photos")
+                    }
+            }))
+            controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
+                println("Cancelled")
+            }))
+            
+            presentViewController(controller, animated: true, completion: nil)
+        }
+        else {
+            let alertView = UIAlertView(title: NSLocalizedString("An error occurred", comment: "An error occurred"), message: NSLocalizedString("ImagePickerSheet needs access to the camera roll", comment: "ImagePickerSheet needs access to the camera roll"), delegate: nil, cancelButtonTitle: NSLocalizedString("OK", comment: "OK"))
+            alertView.show()
+        }
     }
 
-    func dismissCamera(cameraViewController: AnyObject!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+//    func camera(cameraViewController: AnyObject!, didFinishWithImage image: UIImage!, withMetadata metadata: [NSObject : AnyObject]!) {
+//        let imageData = UIImageJPEGRepresentation(image, 0.55)
+//
+//        let imageFile = PFFile(name:"image.jpeg", data:imageData)
+//
+//        var userPhoto = PFObject(className:"UserPhoto")
+//        userPhoto["creator"] = PFUser.currentUser()!
+//        if let cliqGroup = cliqGroup {
+//            userPhoto["cliqGroup"] = cliqGroup
+//        }
+//        userPhoto["imageFile"] = imageFile
+//        userPhoto.saveInBackground()
+//        self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
+//    }
 
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

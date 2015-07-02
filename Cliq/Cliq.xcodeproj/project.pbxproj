@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0D3259746FA5EA7EFC624D44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC56016E2A88643B0595D66 /* libPods.a */; };
+		0DB880041B45D05B00D406D9 /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FF91B45D05B00D406D9 /* AnimationController.swift */; };
+		0DB880051B45D05B00D406D9 /* ImageAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FFA1B45D05B00D406D9 /* ImageAction.swift */; };
+		0DB880061B45D05B00D406D9 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FFB1B45D05B00D406D9 /* ImageCollectionViewCell.swift */; };
+		0DB880071B45D05B00D406D9 /* ImagePickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FFC1B45D05B00D406D9 /* ImagePickerCollectionView.swift */; };
+		0DB880081B45D05B00D406D9 /* ImagePickerSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FFE1B45D05B00D406D9 /* ImagePickerSheetController.swift */; };
+		0DB880091B45D05B00D406D9 /* ImagePreviewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FFF1B45D05B00D406D9 /* ImagePreviewFlowLayout.swift */; };
+		0DB8800A1B45D05B00D406D9 /* ImagePreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB880001B45D05B00D406D9 /* ImagePreviewTableViewCell.swift */; };
+		0DB8800D1B45D05B00D406D9 /* PreviewSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB880031B45D05B00D406D9 /* PreviewSupplementaryView.swift */; };
 		F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F25061AF6E8EF00562863 /* cliq_logo.png */; };
 		F4A367641B37BB3D000C83C4 /* CliqCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */; };
 		F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */; };
@@ -29,6 +37,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DB87FF91B45D05B00D406D9 /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
+		0DB87FFA1B45D05B00D406D9 /* ImageAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAction.swift; sourceTree = "<group>"; };
+		0DB87FFB1B45D05B00D406D9 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		0DB87FFC1B45D05B00D406D9 /* ImagePickerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerCollectionView.swift; sourceTree = "<group>"; };
+		0DB87FFD1B45D05B00D406D9 /* ImagePickerSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerSheetController.h; sourceTree = "<group>"; };
+		0DB87FFE1B45D05B00D406D9 /* ImagePickerSheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerSheetController.swift; sourceTree = "<group>"; };
+		0DB87FFF1B45D05B00D406D9 /* ImagePreviewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewFlowLayout.swift; sourceTree = "<group>"; };
+		0DB880001B45D05B00D406D9 /* ImagePreviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewTableViewCell.swift; sourceTree = "<group>"; };
+		0DB880031B45D05B00D406D9 /* PreviewSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewSupplementaryView.swift; sourceTree = "<group>"; };
 		5EA9BB17B9E9E29FD8B1F448 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		66847187CA27E94849DB334A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ABC56016E2A88643B0595D66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +83,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0DB87FF81B45D05B00D406D9 /* ImagePickerSheetController */ = {
+			isa = PBXGroup;
+			children = (
+				0DB87FF91B45D05B00D406D9 /* AnimationController.swift */,
+				0DB87FFA1B45D05B00D406D9 /* ImageAction.swift */,
+				0DB87FFB1B45D05B00D406D9 /* ImageCollectionViewCell.swift */,
+				0DB87FFC1B45D05B00D406D9 /* ImagePickerCollectionView.swift */,
+				0DB87FFD1B45D05B00D406D9 /* ImagePickerSheetController.h */,
+				0DB87FFE1B45D05B00D406D9 /* ImagePickerSheetController.swift */,
+				0DB87FFF1B45D05B00D406D9 /* ImagePreviewFlowLayout.swift */,
+				0DB880001B45D05B00D406D9 /* ImagePreviewTableViewCell.swift */,
+				0DB880031B45D05B00D406D9 /* PreviewSupplementaryView.swift */,
+			);
+			path = ImagePickerSheetController;
+			sourceTree = "<group>";
+		};
 		4605810D39F6D0C34D249BBB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +139,7 @@
 		F4CABB061AF6CFB80059A1A7 /* Cliq */ = {
 			isa = PBXGroup;
 			children = (
+				0DB87FF81B45D05B00D406D9 /* ImagePickerSheetController */,
 				F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */,
 				F48F25061AF6E8EF00562863 /* cliq_logo.png */,
 				F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */,
@@ -195,6 +229,7 @@
 				TargetAttributes = {
 					F4CABB031AF6CFB80059A1A7 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = Y86G6TS245;
 					};
 					F4CABB181AF6CFB80059A1A7 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -280,8 +315,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DB880091B45D05B00D406D9 /* ImagePreviewFlowLayout.swift in Sources */,
+				0DB880061B45D05B00D406D9 /* ImageCollectionViewCell.swift in Sources */,
+				0DB8800A1B45D05B00D406D9 /* ImagePreviewTableViewCell.swift in Sources */,
+				0DB880041B45D05B00D406D9 /* AnimationController.swift in Sources */,
+				0DB880081B45D05B00D406D9 /* ImagePickerSheetController.swift in Sources */,
 				F4CABB0C1AF6CFB80059A1A7 /* CliqHomeViewController.swift in Sources */,
 				F4A367641B37BB3D000C83C4 /* CliqCreationViewController.swift in Sources */,
+				0DB8800D1B45D05B00D406D9 /* PreviewSupplementaryView.swift in Sources */,
+				0DB880051B45D05B00D406D9 /* ImageAction.swift in Sources */,
+				0DB880071B45D05B00D406D9 /* ImagePickerCollectionView.swift in Sources */,
 				F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Cliq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Cliq/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

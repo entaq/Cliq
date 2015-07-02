@@ -59,7 +59,8 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate {
                 var cliqCreationVC = self.storyboard?.instantiateViewControllerWithIdentifier("Create Cliq") as! CliqCreationViewController
                 cliqCreationVC.place = place
 
-                self.presentViewController(cliqCreationVC, animated: true, completion: nil)
+                self.performSegueWithIdentifier("Create Cliq", sender: nil)
+//                self.presentViewController(cliqCreationVC, animated: true, completion: nil)
             })
         }
     }
