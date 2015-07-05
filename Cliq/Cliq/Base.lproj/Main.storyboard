@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Cliq Home View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CliqHomeViewController" customModule="Cliq" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,8 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YUm-96-2VE">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="qac-Rb-TZd">
+                                    <size key="itemSize" width="200" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="36G-TE-K8o" customClass="PFCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="QKh-Uq-28O"/>
+                                </connections>
+                            </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kna-n3-3GL">
-                                <rect key="frame" x="0.0" y="536" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="AeX-gO-Msq"/>
                                     <barButtonItem image="cliq_logo.png" id="zZ6-sK-4u3">
@@ -29,44 +53,21 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VzS-Ic-oSR"/>
                                 </items>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6S7-BR-W5L">
-                                <rect key="frame" x="0.0" y="64" width="600" height="472"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoCell" id="U7m-bi-du3">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U7m-bi-du3" id="chF-rd-pZ2">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view tag="10" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pue-8f-UoW" customClass="PFImageView">
-                                                    <rect key="frame" x="8" y="8" width="584" height="100"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="AuM-Ne-QC3"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6S7-BR-W5L" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="01s-9e-rLw"/>
-                            <constraint firstItem="6S7-BR-W5L" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="48B-n7-udc"/>
+                            <constraint firstAttribute="trailing" secondItem="YUm-96-2VE" secondAttribute="trailing" id="COx-U0-G70"/>
                             <constraint firstItem="kna-n3-3GL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DXZ-lf-I7C"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kna-n3-3GL" secondAttribute="bottom" id="JKe-yd-Yv3"/>
-                            <constraint firstAttribute="centerX" secondItem="6S7-BR-W5L" secondAttribute="centerX" id="sxa-8G-wuJ"/>
-                            <constraint firstItem="kna-n3-3GL" firstAttribute="top" secondItem="6S7-BR-W5L" secondAttribute="bottom" id="ubK-54-ngp"/>
-                            <constraint firstAttribute="centerY" secondItem="6S7-BR-W5L" secondAttribute="centerY" id="xjo-U0-0dI"/>
+                            <constraint firstItem="YUm-96-2VE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="P3S-xG-UP3"/>
+                            <constraint firstItem="kna-n3-3GL" firstAttribute="top" secondItem="YUm-96-2VE" secondAttribute="bottom" id="iAw-An-KkV"/>
+                            <constraint firstItem="YUm-96-2VE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="p1k-fz-EmX"/>
                             <constraint firstAttribute="trailing" secondItem="kna-n3-3GL" secondAttribute="trailing" id="zIB-sQ-ikj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uuG-lb-66H"/>
+                    <navigationItem key="navigationItem" title="Home" id="uuG-lb-66H"/>
                     <connections>
-                        <outlet property="tableView" destination="6S7-BR-W5L" id="dqI-Sh-aeR"/>
+                        <outlet property="collectionView" destination="YUm-96-2VE" id="cii-YK-1E3"/>
                         <segue destination="tna-nk-T5a" kind="show" identifier="Create Cliq" id="xXo-dw-g84"/>
                     </connections>
                 </viewController>
@@ -186,24 +187,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfD-fA-ngs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="314" y="293"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="9Zu-ev-gIl">
-            <objects>
-                <viewController id="jRg-6m-xk7" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Iea-n1-gqz"/>
-                        <viewControllerLayoutGuide type="bottom" id="EUk-6I-hmJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lZC-LR-zjr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gk0-sB-ddx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
+            <point key="canvasLocation" x="363" y="293"/>
         </scene>
     </scenes>
     <resources>

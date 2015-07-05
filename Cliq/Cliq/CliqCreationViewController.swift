@@ -1,7 +1,6 @@
 import UIKit
 import GoogleMaps
 import Photos
-//import ImagePickerSheetController
 
 class CliqCreationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var place: GMSPlace?
@@ -69,7 +68,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                 }, secondaryHandler: { _, numberOfPhotos in
                     println("Comment \(numberOfPhotos) photos")
             }))
-            controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("ImagePickerSheet.button1.Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
+            controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
                 presentImagePickerController(.PhotoLibrary)
                 }, secondaryHandler: { _, numberOfPhotos in
                     controller.getSelectedImagesWithCompletion() { images in

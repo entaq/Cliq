@@ -1,7 +1,7 @@
 import UIKit
 import GoogleMaps
 
-class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, UITableViewDataSource {
+class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, UICollectionViewDataSource {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         checkAuthAndUpdateLocation()
@@ -40,7 +40,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     }
 
     var photos = [PFObject]()
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
 
     func loadPhotos() {
         var query = PFQuery(className: "UserPhoto")
@@ -51,31 +51,32 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
             if error == nil {
                 if let objects = objects as? [PFObject] {
                     self.photos = objects
-                    self.tableView.reloadData()
+                    self.collectionView.reloadData()
                 }
             }
         }
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("photoCell") as! UITableViewCell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! PFCollectionViewCell
 
-        var imageView = cell.contentView.viewWithTag(10) as! PFImageView
-
-        imageView.file = photos[indexPath.row]["imageFile"] as? PFFile
-        imageView.loadInBackground { (_, _) -> Void in
+        cell.imageView.file = photos[indexPath.row]["imageFile"] as? PFFile
+        cell.imageView.loadInBackground { (_, _) -> Void in
             cell.setNeedsLayout()
         }
+
+        cell.textLabel.text = photos[indexPath.row]["userName"] as? String
 
         return cell
     }
 
     var placePicker: GMSPlacePicker?
     var cliqGroup : PFObject?
+    var selectedPlace : GMSPlace?
 
     @IBAction func startCliq(sender: UIBarButtonItem) {
         PFGeoPoint.geoPointForCurrentLocationInBackground { (geopoint, error) -> Void in
@@ -91,13 +92,16 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                     println("Pick Place error: \(error.localizedDescription)")
                     return
                 }
-
-                var cliqCreationVC = self.storyboard?.instantiateViewControllerWithIdentifier("Create Cliq") as! CliqCreationViewController
-                cliqCreationVC.place = place
-
+                self.selectedPlace = place
                 self.performSegueWithIdentifier("Create Cliq", sender: nil)
-//                self.presentViewController(cliqCreationVC, animated: true, completion: nil)
             })
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Create Cliq" {
+            var cliqCreationVC = segue.destinationViewController as! CliqCreationViewController
+            cliqCreationVC.place = self.selectedPlace
         }
     }
 
@@ -126,6 +130,5 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         logInViewController.logInView?.facebookButton
         self.presentViewController(logInViewController, animated: true, completion: nil)
     }
-
 }
 
