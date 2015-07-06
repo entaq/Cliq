@@ -16,6 +16,8 @@
 		0DB880091B45D05B00D406D9 /* ImagePreviewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB87FFF1B45D05B00D406D9 /* ImagePreviewFlowLayout.swift */; };
 		0DB8800A1B45D05B00D406D9 /* ImagePreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB880001B45D05B00D406D9 /* ImagePreviewTableViewCell.swift */; };
 		0DB8800D1B45D05B00D406D9 /* PreviewSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB880031B45D05B00D406D9 /* PreviewSupplementaryView.swift */; };
+		0DDDEE861B4B168900ED73CC /* CliqCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDDEE841B4B168900ED73CC /* CliqCollectionViewCell.swift */; };
+		0DDDEE871B4B168900ED73CC /* CliqCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */; };
 		F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F25061AF6E8EF00562863 /* cliq_logo.png */; };
 		F4A367641B37BB3D000C83C4 /* CliqCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */; };
 		F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */; };
@@ -46,6 +48,8 @@
 		0DB87FFF1B45D05B00D406D9 /* ImagePreviewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewFlowLayout.swift; sourceTree = "<group>"; };
 		0DB880001B45D05B00D406D9 /* ImagePreviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewTableViewCell.swift; sourceTree = "<group>"; };
 		0DB880031B45D05B00D406D9 /* PreviewSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewSupplementaryView.swift; sourceTree = "<group>"; };
+		0DDDEE841B4B168900ED73CC /* CliqCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CliqCollectionViewCell.swift; sourceTree = "<group>"; };
+		0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CliqCollectionViewCell.xib; sourceTree = "<group>"; };
 		5EA9BB17B9E9E29FD8B1F448 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		66847187CA27E94849DB334A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		ABC56016E2A88643B0595D66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +152,8 @@
 				F4CABB101AF6CFB80059A1A7 /* Images.xcassets */,
 				F4CABB121AF6CFB80059A1A7 /* LaunchScreen.xib */,
 				F4CABB071AF6CFB80059A1A7 /* Supporting Files */,
+				0DDDEE841B4B168900ED73CC /* CliqCollectionViewCell.swift */,
+				0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */,
 			);
 			path = Cliq;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */,
 				F4CABB141AF6CFB80059A1A7 /* LaunchScreen.xib in Resources */,
 				F4CABB111AF6CFB80059A1A7 /* Images.xcassets in Resources */,
+				0DDDEE871B4B168900ED73CC /* CliqCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +333,7 @@
 				0DB880051B45D05B00D406D9 /* ImageAction.swift in Sources */,
 				0DB880071B45D05B00D406D9 /* ImagePickerCollectionView.swift in Sources */,
 				F4CABB0A1AF6CFB80059A1A7 /* AppDelegate.swift in Sources */,
+				0DDDEE861B4B168900ED73CC /* CliqCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

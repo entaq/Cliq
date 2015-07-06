@@ -46,7 +46,11 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     @IBOutlet weak var collectionView: UICollectionView!
 
     func loadPhotos() {
+
+        collectionView!.registerNib(UINib(nibName: "CliqCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
+
         var query = PFQuery(className: "UserPhoto")
+        query.includeKey("creator")
         query.orderByDescending("createdAt")
 
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
@@ -65,14 +69,16 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! PFCollectionViewCell
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
 
-        cell.imageView.file = photos[indexPath.row]["imageFile"] as? PFFile
-        cell.imageView.loadInBackground { (_, _) -> Void in
+        cell.cliqImage.file = photos[indexPath.row]["imageFile"] as? PFFile
+        cell.cliqImage.loadInBackground { (_, _) -> Void in
             cell.setNeedsLayout()
         }
 
-        cell.textLabel.text = photos[indexPath.row]["userName"] as? String
+        let creator = photos[indexPath.row]["creator"] as! PFUser
+        let fbId = creator.objectForKey("facebookId") as! String
+        cell.setCliqCreator(fbId)
 
         return cell
     }
