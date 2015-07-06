@@ -6,6 +6,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     var place: GMSPlace?
     var cliqGroup: PFObject?
     
+    @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var captionField: UITextField!
     @IBOutlet weak var nameField: UILabel!
     @IBOutlet weak var locationField: UILabel!
@@ -22,6 +23,12 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
             println("No place selected")
             println("")
         }
+
+        let fbid = PFUser.currentUser()?.objectForKey("facebookId") as! String
+        let url = NSURL(string: "https://graph.facebook.com/\(fbid)/picture?type=large")
+        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
+        profilePic.clipsToBounds = true
+        profilePic.sd_setImageWithURL(url)
     }
 
     @IBAction func cancel(sender: AnyObject) {
@@ -58,7 +65,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                     println("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
                 }
                 controller.sourceType = sourceType
-                
+
                 self.presentViewController(controller, animated: true, completion: nil)
             }
 

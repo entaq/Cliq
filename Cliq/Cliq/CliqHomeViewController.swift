@@ -21,6 +21,9 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                         (geoPoint: PFGeoPoint?, error: NSError?) in
                         if error == nil {
                             let fullname = result.valueForKey("name") as! String
+                            let id = result.valueForKey("id") as! String
+
+                            currentUser["facebookId"] = id
                             currentUser["fullname"] = fullname
                             currentUser["location"] = geoPoint!
                             self.loadPhotos()

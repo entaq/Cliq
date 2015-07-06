@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xvx-R7-rf0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -135,10 +136,18 @@
                                     <action selector="uploadPhoto:" destination="tna-nk-T5a" eventType="touchUpInside" id="mWy-ni-pkb"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yO0-v1-GjA">
+                                <rect key="frame" x="16" y="236" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yO0-v1-GjA" secondAttribute="height" multiplier="1:1" id="fBB-8P-lqo"/>
+                                    <constraint firstAttribute="width" constant="80" id="ibY-W8-Wi7"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6oz-vf-4gj" firstAttribute="top" secondItem="7Mq-uc-8g7" secondAttribute="bottom" constant="14" id="28s-M6-GWH"/>
+                            <constraint firstItem="yO0-v1-GjA" firstAttribute="leading" secondItem="SCu-OC-NyY" secondAttribute="leadingMargin" id="4F4-CP-GdT"/>
                             <constraint firstItem="GzD-pd-f6G" firstAttribute="centerX" secondItem="rTH-Ko-sNT" secondAttribute="centerX" id="7PP-aA-CYv"/>
                             <constraint firstItem="6oz-vf-4gj" firstAttribute="centerX" secondItem="rTH-Ko-sNT" secondAttribute="centerX" id="8L2-Rv-y7A"/>
                             <constraint firstAttribute="centerX" secondItem="6oz-vf-4gj" secondAttribute="centerX" id="MrE-yR-mOQ"/>
@@ -146,6 +155,7 @@
                             <constraint firstItem="6oz-vf-4gj" firstAttribute="bottom" secondItem="rTH-Ko-sNT" secondAttribute="top" constant="-10" id="VF0-wZ-frK"/>
                             <constraint firstItem="acg-Hb-zkV" firstAttribute="top" secondItem="TZW-a0-KVo" secondAttribute="top" constant="60" id="dZC-rT-W4H"/>
                             <constraint firstItem="acg-Hb-zkV" firstAttribute="centerX" secondItem="dih-z4-bc0" secondAttribute="centerX" constant="16" id="e1E-ln-oGY"/>
+                            <constraint firstItem="yO0-v1-GjA" firstAttribute="top" secondItem="7Mq-uc-8g7" secondAttribute="bottom" constant="23" id="fkV-eM-hbz"/>
                             <constraint firstItem="6oz-vf-4gj" firstAttribute="top" secondItem="dih-z4-bc0" secondAttribute="top" constant="42" id="g6l-d7-ZdI"/>
                             <constraint firstItem="7Mq-uc-8g7" firstAttribute="leading" secondItem="SCu-OC-NyY" secondAttribute="leadingMargin" id="gWt-56-Sp1"/>
                             <constraint firstItem="7Mq-uc-8g7" firstAttribute="leading" secondItem="dih-z4-bc0" secondAttribute="leading" id="hIU-zm-IQl"/>
@@ -165,6 +175,7 @@
                         <outlet property="captionField" destination="7Mq-uc-8g7" id="4Pg-wz-QI5"/>
                         <outlet property="locationField" destination="dih-z4-bc0" id="5vq-bk-sK9"/>
                         <outlet property="nameField" destination="acg-Hb-zkV" id="9FS-5n-xiG"/>
+                        <outlet property="profilePic" destination="yO0-v1-GjA" id="hSc-y7-zxb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2T-aO-Q3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
