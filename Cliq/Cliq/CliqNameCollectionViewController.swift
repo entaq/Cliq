@@ -16,5 +16,7 @@ class CliqNameCollectionViewController: UIViewController {
     override func viewDidLoad() {
         
         coverPhotoImageView.image = imageForCoverPhoto
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "CREATE", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
     }
 }
