@@ -6,6 +6,8 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     var place: GMSPlace?
     var cliqGroup: PFObject?
     
+    var imageForNameCollection : UIImage?
+    
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var captionField: UITextField!
     @IBOutlet weak var nameField: UILabel!
@@ -81,6 +83,10 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                     controller.getSelectedImagesWithCompletion() { images in
                         for image in images {
                             if let image = image {
+                                
+                                // [Anar] Capturing image for subsequent view controller
+                                self.imageForNameCollection = image
+                                
                                 let imageData = UIImageJPEGRepresentation(image, 0.55)
                                 let imageFile = PFFile(name:"image.jpeg", data:imageData)
                                 var userPhoto = PFObject(className:"UserPhoto")
@@ -108,5 +114,15 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var nameCollectionVC : CliqNameCollectionViewController = segue.destinationViewController as! CliqNameCollectionViewController
+        
+        nameCollectionVC.imageForCoverPhoto = self.imageForNameCollection
+        
     }
 }

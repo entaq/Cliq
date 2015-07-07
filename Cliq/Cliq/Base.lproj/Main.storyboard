@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xvx-R7-rf0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xvx-R7-rf0">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -115,6 +115,7 @@
                                 </state>
                                 <connections>
                                     <action selector="save:" destination="tna-nk-T5a" eventType="touchUpInside" id="iPp-Xb-zB3"/>
+                                    <segue destination="ieV-YD-52H" kind="show" id="P4t-eD-vRq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTH-Ko-sNT">
@@ -181,6 +182,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2T-aO-Q3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1895" y="293"/>
+        </scene>
+        <!--Cliq Name Collection View Controller-->
+        <scene sceneID="sHG-Jh-yBX">
+            <objects>
+                <viewController id="ieV-YD-52H" customClass="CliqNameCollectionViewController" customModule="Cliq" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qIr-8I-gvy"/>
+                        <viewControllerLayoutGuide type="bottom" id="rjR-oF-Nkf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qad-UP-miE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kh3-XN-Mhe">
+                                <rect key="frame" x="0.0" y="64" width="600" height="267"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Kh3-XN-Mhe" secondAttribute="trailing" id="R19-oB-E7A"/>
+                            <constraint firstItem="Kh3-XN-Mhe" firstAttribute="top" secondItem="qIr-8I-gvy" secondAttribute="bottom" id="UJb-oA-kDI"/>
+                            <constraint firstItem="Kh3-XN-Mhe" firstAttribute="leading" secondItem="qad-UP-miE" secondAttribute="leading" id="h4Y-6C-EzX"/>
+                            <constraint firstItem="rjR-oF-Nkf" firstAttribute="top" secondItem="Kh3-XN-Mhe" secondAttribute="bottom" constant="269" id="xIf-6q-IFl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="coverPhotoImageView" destination="Kh3-XN-Mhe" id="mB9-Y4-AfU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NR3-tm-m8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2624" y="293"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="En2-ZM-55L">
