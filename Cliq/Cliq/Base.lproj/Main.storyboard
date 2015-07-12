@@ -308,8 +308,11 @@
                     </view>
                     <connections>
                         <outlet property="coverPhotoImageView" destination="Kh3-XN-Mhe" id="mB9-Y4-AfU"/>
+                        <outlet property="customDateTimeSwitch" destination="hNG-kW-KCV" id="MyH-lV-GLi"/>
                         <outlet property="descriptionTextField" destination="F6B-JM-oa7" id="pEp-fU-tPt"/>
+                        <outlet property="inviteFriendsAtLocationSwitch" destination="ANc-3W-lEw" id="QqA-9z-7QM"/>
                         <outlet property="nameCollectionTextField" destination="Suk-NN-VkA" id="rB1-fe-BIe"/>
+                        <outlet property="privateCollectionSwitch" destination="zhN-lt-B03" id="P9I-Dy-eVE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NR3-tm-m8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
