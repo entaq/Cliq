@@ -42,6 +42,28 @@ class CliqNameCollectionViewController: UIViewController {
         cliq["customDateTime"] = customDateTimeSwitch.on
         cliq["inviteFriends"] = inviteFriendsAtLocationSwitch.on
         cliq.saveInBackground()
+        
+        // [Anar] Upload photo and associated data to Parse
+        
+        var userPhoto : PFObject
+        
+        if let image = imageForCoverPhoto {
+            let imageData = UIImageJPEGRepresentation(image, 0.55)
+            let imageFile = PFFile(name: "image.jpeg", data: imageData)
+            userPhoto = PFObject(className: "UserPhoto")
+            userPhoto["creator"] = PFUser.currentUser()
+            userPhoto["cliqGroup"] = cliq // [Anar] Pointer to the cliqGroup to which the photo belongs
+//            cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
+            userPhoto["imageFile"] = imageFile // [Anar] Save as binary on Parse
+            userPhoto.saveInBackground() // [Anar] Not saving here at all for some odd reason, looking into it
+            
+        }
+        
+//        let parseObjects : [PFObject] = [cliq]
+//        PFObject.saveAllInBackground(parseObjects)
+        
+        // [Anar] Thought it would make more sense to upload the collection here, considering that we may still have to add a pointer to the photo in the preceding code
+        // [Anar] But for some odd reason, it won't save the collection when I save here
     }
     
     // TODO: create a photo to be uploaded to parse
