@@ -2,6 +2,7 @@ import UIKit
 import GoogleMaps
 
 class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, UICollectionViewDataSource {
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         checkAuthAndUpdateLocation()
@@ -42,16 +43,25 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         }
     }
 
+    //MARK: Collection view methods
+    
     var photos = [PFObject]()
     @IBOutlet weak var collectionView: UICollectionView!
 
     func loadPhotos() {
-
+        
+        // wiring up collection view with custom collection cell
         collectionView!.registerNib(UINib(nibName: "CliqCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
 
-        var query = PFQuery(className: "UserPhoto")
-        query.includeKey("creator")
+        // query all the cliqAlbum objects, use cover photos for each collection cell
+        var query = PFQuery(className: "CliqAlbum")
+        query.includeKey("coverPhoto")
         query.orderByDescending("createdAt")
+        
+        
+//        var query = PFQuery(className: "UserPhoto")
+//        query.includeKey("creator")
+//        query.orderByDescending("createdAt")
 
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
 
@@ -70,15 +80,35 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
-
-        cell.cliqImage.file = photos[indexPath.row]["imageFile"] as? PFFile
-        cell.cliqImage.loadInBackground { (_, _) -> Void in
-            cell.setNeedsLayout()
+        
+        let cliqAlbum = photos[indexPath.row] as PFObject
+        
+        // grab pointer to photo in UserPhoto table in cliqAlbum's coverPhoto
+        if let coverPhoto = cliqAlbum["coverPhoto"] as? PFObject {
+            cell.cliqImage.file = coverPhoto["imageFile"] as? PFFile
+            
+            cell.cliqImage.loadInBackground { (_, _) -> Void in
+                cell.setNeedsLayout()
+            }
+            
+            let creator = coverPhoto["creator"] as! PFUser
+//            if let facebookId = creator["facebookId"] as? String {
+//                cell.setCliqCreator(facebookId);
+//            }
+            
+            
+            
         }
+        
 
-        let creator = photos[indexPath.row]["creator"] as! PFUser
-        let fbId = creator.objectForKey("facebookId") as! String
-        cell.setCliqCreator(fbId)
+//        cell.cliqImage.file = photos[indexPath.row]["imageFile"] as? PFFile
+//        cell.cliqImage.loadInBackground { (_, _) -> Void in
+//            cell.setNeedsLayout()
+//        }
+//
+//        let creator = photos[indexPath.row]["creator"] as! PFUser
+//        let fbId = creator.objectForKey("facebookId") as! String
+//        cell.setCliqCreator(fbId)
 
         return cell
     }

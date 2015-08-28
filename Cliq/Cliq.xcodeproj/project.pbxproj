@@ -122,6 +122,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B2471F8E1B8FEB5600A8D45A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */,
+				F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */,
+				B2DA1E051B4C958B00B62C38 /* CliqNameCollectionViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B2471F8F1B8FEBC300A8D45A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0DDDEE841B4B168900ED73CC /* CliqCollectionViewCell.swift */,
+				0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		F4CABAFB1AF6CFB80059A1A7 = {
 			isa = PBXGroup;
 			children = (
@@ -145,18 +164,14 @@
 		F4CABB061AF6CFB80059A1A7 /* Cliq */ = {
 			isa = PBXGroup;
 			children = (
-				0DB87FF81B45D05B00D406D9 /* ImagePickerSheetController */,
-				F4A367631B37BB3D000C83C4 /* CliqCreationViewController.swift */,
-				F48F25061AF6E8EF00562863 /* cliq_logo.png */,
 				F4CABB091AF6CFB80059A1A7 /* AppDelegate.swift */,
-				F4CABB0B1AF6CFB80059A1A7 /* CliqHomeViewController.swift */,
-				B2DA1E051B4C958B00B62C38 /* CliqNameCollectionViewController.swift */,
+				B2471F8F1B8FEBC300A8D45A /* Views */,
+				0DB87FF81B45D05B00D406D9 /* ImagePickerSheetController */,
+				B2471F8E1B8FEB5600A8D45A /* Controllers */,
 				F4CABB0D1AF6CFB80059A1A7 /* Main.storyboard */,
 				F4CABB101AF6CFB80059A1A7 /* Images.xcassets */,
 				F4CABB121AF6CFB80059A1A7 /* LaunchScreen.xib */,
 				F4CABB071AF6CFB80059A1A7 /* Supporting Files */,
-				0DDDEE841B4B168900ED73CC /* CliqCollectionViewCell.swift */,
-				0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */,
 			);
 			path = Cliq;
 			sourceTree = "<group>";
@@ -164,6 +179,7 @@
 		F4CABB071AF6CFB80059A1A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F48F25061AF6E8EF00562863 /* cliq_logo.png */,
 				F4CABB081AF6CFB80059A1A7 /* Info.plist */,
 				F48F25031AF6D52A00562863 /* Cliq-Bridging-Header.h */,
 			);
