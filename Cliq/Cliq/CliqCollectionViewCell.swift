@@ -14,4 +14,8 @@ class CliqCollectionViewCell: UICollectionViewCell {
         let url = NSURL(string: "https://graph.facebook.com/\(fbid)/picture?type=large")
         profileImage.sd_setImageWithURL(url)
     }
+    
+    override func prepareForReuse() {
+        profileImage.image = nil
+    }
 }

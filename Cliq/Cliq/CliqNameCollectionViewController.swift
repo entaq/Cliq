@@ -51,6 +51,9 @@ class CliqNameCollectionViewController: UIViewController {
             let imageData = UIImageJPEGRepresentation(image, 0.55)
             let imageFile = PFFile(name: "image.jpeg", data: imageData)
             userPhoto = PFObject(className: "UserPhoto")
+            
+            let user = PFUser.currentUser()! as PFObject
+            
             userPhoto["creator"] = PFUser.currentUser()
             userPhoto["cliqGroup"] = cliq // [Anar] Pointer to the cliqGroup to which the photo belongs
             userPhoto["imageFile"] = imageFile // [Anar] Save as binary on Parse
@@ -58,6 +61,7 @@ class CliqNameCollectionViewController: UIViewController {
                 if (success) {
                     println("Saved photo successfully")
                     
+                    cliq["facebookId"] = user["facebookId"]
                     cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
                     cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
                         

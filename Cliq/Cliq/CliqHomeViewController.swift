@@ -91,12 +91,9 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                 cell.setNeedsLayout()
             }
             
-            let creator = coverPhoto["creator"] as! PFUser
-//            if let facebookId = creator["facebookId"] as? String {
-//                cell.setCliqCreator(facebookId);
-//            }
-            
-            
+            if let facebookId : String = cliqAlbum["facebookId"] as? String {
+                cell.setCliqCreator(facebookId);
+            }
             
         }
         
