@@ -40,6 +40,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="QKh-Uq-28O"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="FTI-Pm-8PS"/>
                                 </connections>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kna-n3-3GL">
@@ -70,11 +71,62 @@
                     <connections>
                         <outlet property="collectionView" destination="YUm-96-2VE" id="cii-YK-1E3"/>
                         <segue destination="tna-nk-T5a" kind="show" identifier="Create Cliq" id="xXo-dw-g84"/>
+                        <segue destination="sPG-Ie-TaV" kind="show" identifier="List Cliq Photos" id="GsQ-Xn-uMK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1126" y="293"/>
+        </scene>
+        <!--Cliq List Photos View Controller-->
+        <scene sceneID="mfT-Uv-g8c">
+            <objects>
+                <viewController id="sPG-Ie-TaV" customClass="CliqListPhotosViewController" customModule="Cliq" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oun-5b-IBc"/>
+                        <viewControllerLayoutGuide type="bottom" id="JjV-c1-XoB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Kd-yC-2Ab">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZTT-QY-9rj">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="vYE-4O-Dgk">
+                                    <size key="itemSize" width="200" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="kpL-3v-WEf" customClass="CliqCollectionViewCell" customModule="Cliq" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="izl-Rs-WBM"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZTT-QY-9rj" firstAttribute="top" secondItem="oun-5b-IBc" secondAttribute="bottom" id="I1q-1o-ddO"/>
+                            <constraint firstItem="ZTT-QY-9rj" firstAttribute="leading" secondItem="7Kd-yC-2Ab" secondAttribute="leading" id="YkS-Ml-izb"/>
+                            <constraint firstItem="ZTT-QY-9rj" firstAttribute="bottom" secondItem="JjV-c1-XoB" secondAttribute="top" id="Zov-KH-W6o"/>
+                            <constraint firstAttribute="trailing" secondItem="ZTT-QY-9rj" secondAttribute="trailing" id="kz3-gv-Z3Q"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UmB-zH-Xav" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1895" y="993"/>
         </scene>
         <!--Cliq Creation View Controller-->
         <scene sceneID="UsX-jo-CAT">

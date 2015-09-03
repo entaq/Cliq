@@ -1,12 +1,14 @@
 import UIKit
 import GoogleMaps
 
-class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, UICollectionViewDataSource {
+class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         checkAuthAndUpdateLocation()
     }
+    
+    //MARK: Check/Update location
 
     func checkAuthAndUpdateLocation() {
         if let currentUser = PFUser.currentUser() where PFFacebookUtils.isLinkedWithUser(currentUser) {
@@ -42,29 +44,24 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
             showLoginScreen()
         }
     }
-
-    //MARK: Collection view methods
+    
+    //MARK: Photos
     
     var photos = [PFObject]()
     @IBOutlet weak var collectionView: UICollectionView!
-
+    
     func loadPhotos() {
         
         // wiring up collection view with custom collection cell
         collectionView!.registerNib(UINib(nibName: "CliqCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
-
+        
         // query all the cliqAlbum objects, use cover photos for each collection cell
         var query = PFQuery(className: "CliqAlbum")
         query.includeKey("coverPhoto")
         query.orderByDescending("createdAt")
         
-        
-//        var query = PFQuery(className: "UserPhoto")
-//        query.includeKey("creator")
-//        query.orderByDescending("createdAt")
-
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-
+            
             if error == nil {
                 if let objects = objects as? [PFObject] {
                     self.photos = objects
@@ -73,6 +70,8 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
             }
         }
     }
+
+    //MARK: Collection view data source methods
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
@@ -96,19 +95,19 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
             }
             
         }
-        
-
-//        cell.cliqImage.file = photos[indexPath.row]["imageFile"] as? PFFile
-//        cell.cliqImage.loadInBackground { (_, _) -> Void in
-//            cell.setNeedsLayout()
-//        }
-//
-//        let creator = photos[indexPath.row]["creator"] as! PFUser
-//        let fbId = creator.objectForKey("facebookId") as! String
-//        cell.setCliqCreator(fbId)
 
         return cell
     }
+    
+    //MARK: Collection view delegate methods
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        self.performSegueWithIdentifier("List Cliq Photos", sender: nil)
+        
+    }
+    
+    //MARK: Create cliq
 
     var placePicker: GMSPlacePicker?
     var cliqGroup : PFObject?
@@ -147,6 +146,8 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
+    
+    //MARK: Login
 
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
         checkAuthAndUpdateLocation()
