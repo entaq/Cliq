@@ -123,6 +123,9 @@
                             <constraint firstAttribute="trailing" secondItem="ZTT-QY-9rj" secondAttribute="trailing" id="kz3-gv-Z3Q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="ZTT-QY-9rj" id="dW1-5j-AbN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UmB-zH-Xav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

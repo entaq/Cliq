@@ -103,7 +103,11 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        self.performSegueWithIdentifier("List Cliq Photos", sender: nil)
+        let cliqAlbum = photos[indexPath.row] as PFObject
+        
+        let cliqId = cliqAlbum.objectId
+        
+        self.performSegueWithIdentifier("List Cliq Photos", sender: cliqId)
         
     }
     
@@ -137,6 +141,9 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         if segue.identifier == "Create Cliq" {
             var cliqCreationVC = segue.destinationViewController as! CliqCreationViewController
             cliqCreationVC.place = self.selectedPlace
+        } else if segue.identifier == "List Cliq Photos" {
+            var listCliqPhotosVC = segue.destinationViewController as! CliqListPhotosViewController
+            listCliqPhotosVC.cliqId = sender as! String
         }
     }
 

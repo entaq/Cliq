@@ -8,12 +8,63 @@
 
 import UIKit
 
-class CliqListPhotosViewController: UIViewController {
+class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource {
+    
+    var cliqId = ""
+    
+    var photos = [PFObject]()
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.loadPhotos()
+    }
+    
+    func loadPhotos() {
+        
+        collectionView.registerNib(UINib(nibName: "CliqCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
+        
+        // trying to load all the photos that belong to cliqAlbum
+        // id of the cliq album would come in handy for a query of those photos
+        
+        //query all the user photos that belong to the cliqAlbum which the user originally selected from the home controller
+        
+        var query = PFQuery(className: "UserPhoto")
+        query.orderByDescending("createdAt")
+        
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            if error == nil {
+                if let objects = objects as? [PFObject] {
+                    self.photos = objects
+                    
+                    println(self.photos.count)
+                    
+                    self.collectionView.reloadData()
+                }
+            } else {
+               
+                println(error?.description)
+            }
+        }
+        
+        
+    }
+    
+    // MARK: Collection view data source methods
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
+        
+        return cell
     }
 
     override func didReceiveMemoryWarning() {
