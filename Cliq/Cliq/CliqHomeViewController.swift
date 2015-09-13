@@ -107,6 +107,8 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         
         let cliqId = cliqAlbum.objectId
         
+        // passing objectId of cliq as a String to the next VC
+        
         self.performSegueWithIdentifier("List Cliq Photos", sender: cliqId)
         
     }
