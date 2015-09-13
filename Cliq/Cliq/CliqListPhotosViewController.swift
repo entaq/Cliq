@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource {
+class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var cliqId = ""
     
@@ -65,6 +65,21 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
+        
+        let userPhoto = photos[indexPath.row] as PFObject
+        
+        if let userPhotoFile = userPhoto["imageFile"] as? PFFile {
+            
+            cell.cliqImage.file = userPhotoFile
+            
+            cell.cliqImage.loadInBackground({ (image: UIImage?, error: NSError?) -> Void in
+                cell.setNeedsLayout()
+            })
+            
+            // will the list of photos always be by the same facebook user?
+            // need to rethink data model to take that into account
+        }
+        
         
         return cell
     }
