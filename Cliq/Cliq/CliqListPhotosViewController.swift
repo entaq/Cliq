@@ -36,6 +36,7 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
         query.whereKey("cliqGroup", equalTo: PFObject(withoutDataWithClassName: "CliqAlbum", objectId: cliqId))
         
         query.orderByDescending("createdAt")
+        query.includeKey("creator")
         
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
@@ -76,11 +77,14 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
                 cell.setNeedsLayout()
             })
             
-            // will the list of photos always be by the same facebook user?
-            // need to rethink data model to take that into account
+            if let creator = userPhoto["creator"] as? PFObject {
+                
+                if let facebookId = creator["facebookId"] as? String {
+                    cell.setCliqCreator(facebookId)
+                }
+            }
         }
-        
-        
+                
         return cell
     }
 
