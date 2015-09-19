@@ -18,6 +18,7 @@
 		0DB8800D1B45D05B00D406D9 /* PreviewSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB880031B45D05B00D406D9 /* PreviewSupplementaryView.swift */; };
 		0DDDEE861B4B168900ED73CC /* CliqCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDDEE841B4B168900ED73CC /* CliqCollectionViewCell.swift */; };
 		0DDDEE871B4B168900ED73CC /* CliqCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */; };
+		AAB4DF061BADC7F000F4B8F3 /* Action_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AAB4DF051BADC7F000F4B8F3 /* Action_button.png */; };
 		B24CCA1B1B97CEBE00A16773 /* CliqListPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24CCA1A1B97CEBE00A16773 /* CliqListPhotosViewController.swift */; };
 		B2DA1E061B4C958B00B62C38 /* CliqNameCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DA1E051B4C958B00B62C38 /* CliqNameCollectionViewController.swift */; };
 		F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F48F25061AF6E8EF00562863 /* cliq_logo.png */; };
@@ -54,6 +55,7 @@
 		0DDDEE851B4B168900ED73CC /* CliqCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CliqCollectionViewCell.xib; sourceTree = "<group>"; };
 		5EA9BB17B9E9E29FD8B1F448 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		66847187CA27E94849DB334A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AAB4DF051BADC7F000F4B8F3 /* Action_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Action_button.png; sourceTree = "<group>"; };
 		ABC56016E2A88643B0595D66 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24CCA1A1B97CEBE00A16773 /* CliqListPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CliqListPhotosViewController.swift; sourceTree = "<group>"; };
 		B2DA1E051B4C958B00B62C38 /* CliqNameCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CliqNameCollectionViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		F4CABB071AF6CFB80059A1A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AAB4DF051BADC7F000F4B8F3 /* Action_button.png */,
 				F48F25061AF6E8EF00562863 /* cliq_logo.png */,
 				F4CABB081AF6CFB80059A1A7 /* Info.plist */,
 				F48F25031AF6D52A00562863 /* Cliq-Bridging-Header.h */,
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4CABB0F1AF6CFB80059A1A7 /* Main.storyboard in Resources */,
+				AAB4DF061BADC7F000F4B8F3 /* Action_button.png in Resources */,
 				F48F25071AF6E8EF00562863 /* cliq_logo.png in Resources */,
 				F4CABB141AF6CFB80059A1A7 /* LaunchScreen.xib in Resources */,
 				F4CABB111AF6CFB80059A1A7 /* Images.xcassets in Resources */,
