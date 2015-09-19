@@ -81,7 +81,7 @@
         <!--Cliq List Photos View Controller-->
         <scene sceneID="mfT-Uv-g8c">
             <objects>
-                <viewController id="sPG-Ie-TaV" customClass="CliqListPhotosViewController" customModule="Cliq" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListPhotosVC" id="sPG-Ie-TaV" customClass="CliqListPhotosViewController" customModule="Cliq" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oun-5b-IBc"/>
                         <viewControllerLayoutGuide type="bottom" id="JjV-c1-XoB"/>
@@ -369,7 +369,6 @@
                         <outlet property="inviteFriendsAtLocationSwitch" destination="ANc-3W-lEw" id="QqA-9z-7QM"/>
                         <outlet property="nameCollectionTextField" destination="Suk-NN-VkA" id="rB1-fe-BIe"/>
                         <outlet property="privateCollectionSwitch" destination="zhN-lt-B03" id="P9I-Dy-eVE"/>
-                        <segue destination="sPG-Ie-TaV" kind="show" identifier="List Cliq Photos" id="sHK-Fj-7VI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NR3-tm-m8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -398,8 +397,5 @@
     <resources>
         <image name="Action_button.png" width="50" height="50"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="sHK-Fj-7VI"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.27843137254901962" green="0.84313725490196079" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

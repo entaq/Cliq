@@ -85,7 +85,15 @@ class CliqNameCollectionViewController: UIViewController {
                             if (success) {
                                 println("Saved cliq successfully")
                                 
-                                self.performSegueWithIdentifier("List Cliq Photos", sender: cliq.objectId)
+                                // [Anar] pop to home, and then advance to list photos VC
+                                
+                                var listPhotosVC : CliqListPhotosViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListPhotosVC") as! CliqListPhotosViewController
+                                listPhotosVC.cliqId = cliq.objectId!
+                                
+                                let navController : UINavigationController = self.navigationController!
+                                navController.popToRootViewControllerAnimated(false)
+                                navController.pushViewController(listPhotosVC, animated: false) // [Anar] play around with true/false to your liking
+                                
                             } else {
                                 
                                 // TODO: [Anar] might be nice to let the user know with an alert controller
@@ -114,14 +122,6 @@ class CliqNameCollectionViewController: UIViewController {
             
         }
         
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "List Cliq Photos" {
-            var listCliqPhotosVC = segue.destinationViewController as! CliqListPhotosViewController
-            listCliqPhotosVC.cliqId = sender as! String
-        }
     }
     
 }
