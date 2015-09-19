@@ -395,7 +395,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Action_button.png" width="273" height="312"/>
+        <image name="Action_button.png" width="50" height="50"/>
     </resources>
     <color key="tintColor" red="0.27843137254901962" green="0.84313725490196079" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
