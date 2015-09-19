@@ -16,10 +16,10 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
 //            if let name = place.name {
 //                nameField.text = name
 //            }
-//            locationField.text = " ".join(place.formattedAddress.componentsSeparatedByString(", "))
+//            locationField.text = place.formattedAddress.componentsSeparatedByString(", ").joinWithSeparator(" ")
 //        } else {
-//            println("No place selected")
-//            println("")
+//            print("No place selected")
+//            print("")
 //        }
 //
 //        let fbid = PFUser.currentUser()?.objectForKey("facebookId") as! String
@@ -27,7 +27,6 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
 //        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
 //        profilePic.clipsToBounds = true
 //        profilePic.sd_setImageWithURL(url)
-//
         self.uploadPhoto()
     }
 
@@ -40,9 +39,8 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
         // TODO: [Anar] Don't upload these details
         // TODO: [Anar] Send either cliq object or the individual details to the CliqNameCollectionViewController
         
-        var cliq = PFObject(className:"CliqAlbum")
-        cliq["name"] = place!.name
-        cliq["address"] = "\n".join(place!.formattedAddress.componentsSeparatedByString(", "))
+        let cliq = PFObject(className:"CliqAlbum")
+        cliq["address"] = place!.formattedAddress.componentsSeparatedByString(", ").joinWithSeparator("\n")
         //cliq["caption"] = self.captionField.text
         cliq.saveInBackground()
         cliqGroup = cliq
@@ -67,7 +65,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                 var sourceType = source
                 if (!UIImagePickerController.isSourceTypeAvailable(sourceType)) {
                     sourceType = .PhotoLibrary
-                    println("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
+                    print("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
                 }
                 controller.sourceType = sourceType
 
@@ -78,7 +76,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
             controller.addAction(ImageAction(title: NSLocalizedString("Take Photo Or Video", comment: "Action Title"), secondaryTitle: NSLocalizedString("Add comment", comment: "Action Title"), handler: { _ in
                 presentImagePickerController(.Camera)
                 }, secondaryHandler: { _, numberOfPhotos in
-                    println("Comment \(numberOfPhotos) photos")
+                    print("Comment \(numberOfPhotos) photos")
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
                 presentImagePickerController(.PhotoLibrary)
@@ -97,7 +95,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                                 // TODO: [Anar] need to decide if we want to select an image or a userPhoto object to send to next VC's cover photo attribute
                                 
                                 let imageData = UIImageJPEGRepresentation(image, 0.55)
-                                let imageFile = PFFile(name:"image.jpeg", data:imageData)
+                                let imageFile = PFFile(name:"image.jpeg", data:imageData!)
                                 var userPhoto = PFObject(className:"UserPhoto")
                                 userPhoto["creator"] = PFUser.currentUser()!
                                 
@@ -109,9 +107,9 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                         }
                         
                         // [Anar] create cliq object, ready to sent over to the next vc
-                        var cliq = PFObject(className:"CliqAlbum")
+                        let cliq = PFObject(className:"CliqAlbum")
                         cliq["name"] = self.place!.name
-                        cliq["address"] = "\n".join(self.place!.formattedAddress.componentsSeparatedByString(", "))
+                        cliq["address"] = self.place!.formattedAddress.componentsSeparatedByString(", ").joinWithSeparator("\n")
                         self.cliqGroup = cliq
                         
                         // [Anar] advance to the next vc
@@ -121,11 +119,10 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                     }
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
-                println("Cancelled")
-                
                 // TODO: [Anar] go back to choosing a location
                 
                 self.navigationController?.popViewControllerAnimated(true)
+                print("Cancelled")
             }))
             
             presentViewController(controller, animated: true, completion: nil)
@@ -144,7 +141,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        var nameCollectionVC : CliqNameCollectionViewController = segue.destinationViewController as! CliqNameCollectionViewController
+        let nameCollectionVC : CliqNameCollectionViewController = segue.destinationViewController as! CliqNameCollectionViewController
         
         nameCollectionVC.imageForCoverPhoto = self.imageForNameCollection
         nameCollectionVC.cliqGroup = self.cliqGroup

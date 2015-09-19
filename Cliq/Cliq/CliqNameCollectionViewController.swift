@@ -45,7 +45,13 @@ class CliqNameCollectionViewController: UIViewController {
         
         let user = PFUser.currentUser()! as PFObject
         
-        var cliq = self.cliqGroup!
+        let cliq = self.cliqGroup!
+        cliq["collectionName"] = nameCollectionTextField.text
+        cliq["description"] = descriptionTextField.text
+        cliq["private"] = privateCollectionSwitch.on
+        cliq["customDateTime"] = customDateTimeSwitch.on
+        cliq["inviteFriends"] = inviteFriendsAtLocationSwitch.on
+        cliq.saveInBackground()
         
         cliq["facebookId"] = user["facebookId"]
         cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the last userPhoto that was just created
@@ -55,7 +61,7 @@ class CliqNameCollectionViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 if (success) {
-                    println("Saved cliq successfully")
+                    print("Saved cliq successfully")
                     
                     // [Anar] pop to home, and then advance to list photos VC
                     
@@ -72,7 +78,7 @@ class CliqNameCollectionViewController: UIViewController {
                     
                     // TODO: [Anar] might be nice to let the user know with an alert controller
                     
-                    println(error)
+                    print(error)
                 }
                 
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -97,7 +103,7 @@ class CliqNameCollectionViewController: UIViewController {
             userPhoto["cliqGroup"] = cliq // [Anar] Pointer to the cliqGroup to which the photo belongs
             userPhoto.saveInBackgroundWithBlock({ (success, error) -> Void in
                 if (success) {
-                    println("Saved photo successfully")
+                    print("Saved photo successfully")
                     
                     // TODO: upload cliq with the photo which the user selected as the cover photo
                     
@@ -106,12 +112,42 @@ class CliqNameCollectionViewController: UIViewController {
                         self.uploadCliqWithCoverPhoto(userPhoto)
                     }
                     
-                    
+                    cliq["facebookId"] = user["facebookId"]
+                    cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
+                    cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
+                        
+                        // [Anar] allow user inputs again
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            
+                            if (success) {
+                                print("Saved cliq successfully")
+                                
+                                // [Anar] pop to home, and then advance to list photos VC
+                                
+                                let listPhotosVC : CliqListPhotosViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListPhotosVC") as! CliqListPhotosViewController
+                                listPhotosVC.cliqId = cliq.objectId!
+                                
+                                let navController : UINavigationController = self.navigationController!
+                                navController.popToRootViewControllerAnimated(false)
+                                navController.pushViewController(listPhotosVC, animated: false) // [Anar] play around with true/false to your liking
+                                
+                            } else {
+                                
+                                // TODO: [Anar] might be nice to let the user know with an alert controller
+                                
+                                print(error)
+                            }
+                            
+                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                            self.activityIndicator!.stopAnimating()
+                        })
+                        
+                    })
                 } else {
                     
                     // TODO: [Anar] might be a good idea to let user know with an alert controller
                     
-                    println(error)
+                    print(error)
                     
                     // [Anar] allow user inputs again
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -138,7 +174,7 @@ class CliqNameCollectionViewController: UIViewController {
         
         // TODO: once cliq is created, revert user to home view controller
         
-        var cliq = self.cliqGroup!
+        let cliq = self.cliqGroup!
         cliq["collectionName"] = nameCollectionTextField.text
         cliq["description"] = descriptionTextField.text
         cliq["private"] = privateCollectionSwitch.on

@@ -12,7 +12,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
 
     func checkAuthAndUpdateLocation() {
         if let currentUser = PFUser.currentUser() where PFFacebookUtils.isLinkedWithUser(currentUser) {
-            println(currentUser.description)
+            print(currentUser.description)
             let request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
             request.startWithCompletionHandler { (connection, result, error) -> Void in
                 if error == nil {
@@ -32,7 +32,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
                             self.loadPhotos()
                             currentUser.saveInBackground()
                         } else {
-                            println("could not get geopoint \(error?.description)")
+                            print("could not get geopoint \(error?.description)")
                             //TODO: something went wrong
                         }
                     }
@@ -56,7 +56,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         collectionView!.registerNib(UINib(nibName: "CliqCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "photoCell")
         
         // query all the cliqAlbum objects, use cover photos for each collection cell
-        var query = PFQuery(className: "CliqAlbum")
+        let query = PFQuery(className: "CliqAlbum")
         query.includeKey("coverPhoto")
         query.orderByDescending("createdAt")
         
@@ -78,7 +78,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
         
         let cliqAlbum = photos[indexPath.row] as PFObject
         
@@ -130,7 +130,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
 
             self.placePicker?.pickPlaceWithCallback({ (place: GMSPlace?, error: NSError?) -> Void in
                 if let error = error {
-                    println("Pick Place error: \(error.localizedDescription)")
+                    print("Pick Place error: \(error.localizedDescription)")
                     return
                 }
                 self.selectedPlace = place
@@ -141,17 +141,16 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Create Cliq" {
-            var cliqCreationVC = segue.destinationViewController as! CliqCreationViewController
+            let cliqCreationVC = segue.destinationViewController as! CliqCreationViewController
             cliqCreationVC.place = self.selectedPlace
         } else if segue.identifier == "List Cliq Photos" {
-            var listCliqPhotosVC = segue.destinationViewController as! CliqListPhotosViewController
+            let listCliqPhotosVC = segue.destinationViewController as! CliqListPhotosViewController
             listCliqPhotosVC.cliqId = sender as! String
         }
     }
 
     func requestPushAuthorization() {
-        let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-        let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        let settings = UIUserNotificationSettings(forTypes: [.Alert,.Badge,.Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
@@ -163,7 +162,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
     }
 
     func logInViewController(logInController: PFLogInViewController, didFailToLogInWithError error: NSError?) {
-        println("could not log in \(error?.description)")
+        print("could not log in \(error?.description)")
         //TODO: something went wrong
     }
 
