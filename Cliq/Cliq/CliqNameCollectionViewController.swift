@@ -49,7 +49,7 @@ class CliqNameCollectionViewController: UIViewController {
         
         // TODO: once cliq is created, revert user to home view controller
         
-        var cliq = PFObject(className: "CliqAlbum")
+        let cliq = PFObject(className: "CliqAlbum")
         cliq["collectionName"] = nameCollectionTextField.text
         cliq["description"] = descriptionTextField.text
         cliq["private"] = privateCollectionSwitch.on
@@ -63,7 +63,7 @@ class CliqNameCollectionViewController: UIViewController {
         
         if let image = imageForCoverPhoto {
             let imageData = UIImageJPEGRepresentation(image, 0.55)
-            let imageFile = PFFile(name: "image.jpeg", data: imageData)
+            let imageFile = PFFile(name: "image.jpeg", data: imageData!)
             userPhoto = PFObject(className: "UserPhoto")
             
             let user = PFUser.currentUser()! as PFObject
@@ -73,7 +73,7 @@ class CliqNameCollectionViewController: UIViewController {
             userPhoto["imageFile"] = imageFile // [Anar] Save as binary on Parse
             userPhoto.saveInBackgroundWithBlock({ (success, error) -> Void in
                 if (success) {
-                    println("Saved photo successfully")
+                    print("Saved photo successfully")
                     
                     cliq["facebookId"] = user["facebookId"]
                     cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
@@ -83,7 +83,7 @@ class CliqNameCollectionViewController: UIViewController {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             
                             if (success) {
-                                println("Saved cliq successfully")
+                                print("Saved cliq successfully")
                                 
                                 // [Anar] pop to home, and then advance to list photos VC
                                 
@@ -98,7 +98,7 @@ class CliqNameCollectionViewController: UIViewController {
                                 
                                 // TODO: [Anar] might be nice to let the user know with an alert controller
                                 
-                                println(error)
+                                print(error)
                             }
                             
                             UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -110,7 +110,7 @@ class CliqNameCollectionViewController: UIViewController {
                     
                     // TODO: [Anar] might be a good idea to let user know with an alert controller
                     
-                    println(error)
+                    print(error)
                     
                     // [Anar] allow user inputs again
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in

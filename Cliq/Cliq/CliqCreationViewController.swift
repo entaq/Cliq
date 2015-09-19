@@ -20,10 +20,10 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
             if let name = place.name {
                 nameField.text = name
             }
-            locationField.text = " ".join(place.formattedAddress.componentsSeparatedByString(", "))
+            locationField.text = place.formattedAddress.componentsSeparatedByString(", ").joinWithSeparator(" ")
         } else {
-            println("No place selected")
-            println("")
+            print("No place selected")
+            print("")
         }
 
         let fbid = PFUser.currentUser()?.objectForKey("facebookId") as! String
@@ -38,9 +38,9 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     @IBAction func save(sender: AnyObject) {
-        var cliq = PFObject(className:"CliqAlbum")
+        let cliq = PFObject(className:"CliqAlbum")
         cliq["name"] = place!.name
-        cliq["address"] = "\n".join(place!.formattedAddress.componentsSeparatedByString(", "))
+        cliq["address"] = place!.formattedAddress.componentsSeparatedByString(", ").joinWithSeparator("\n")
         cliq["caption"] = self.captionField.text
         cliq.saveInBackground()
         cliqGroup = cliq
@@ -64,7 +64,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                 var sourceType = source
                 if (!UIImagePickerController.isSourceTypeAvailable(sourceType)) {
                     sourceType = .PhotoLibrary
-                    println("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
+                    print("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
                 }
                 controller.sourceType = sourceType
 
@@ -75,7 +75,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
             controller.addAction(ImageAction(title: NSLocalizedString("Take Photo Or Video", comment: "Action Title"), secondaryTitle: NSLocalizedString("Add comment", comment: "Action Title"), handler: { _ in
                 presentImagePickerController(.Camera)
                 }, secondaryHandler: { _, numberOfPhotos in
-                    println("Comment \(numberOfPhotos) photos")
+                    print("Comment \(numberOfPhotos) photos")
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
                 presentImagePickerController(.PhotoLibrary)
@@ -88,7 +88,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                                 self.imageForNameCollection = image
                                 
                                 let imageData = UIImageJPEGRepresentation(image, 0.55)
-                                let imageFile = PFFile(name:"image.jpeg", data:imageData)
+                                let imageFile = PFFile(name:"image.jpeg", data:imageData!)
                                 var userPhoto = PFObject(className:"UserPhoto")
                                 userPhoto["creator"] = PFUser.currentUser()!
                                 if let cliqGroup = self.cliqGroup {
@@ -101,7 +101,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                     }
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
-                println("Cancelled")
+                print("Cancelled")
             }))
             
             presentViewController(controller, animated: true, completion: nil)
@@ -120,7 +120,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        var nameCollectionVC : CliqNameCollectionViewController = segue.destinationViewController as! CliqNameCollectionViewController
+        let nameCollectionVC : CliqNameCollectionViewController = segue.destinationViewController as! CliqNameCollectionViewController
         
         nameCollectionVC.imageForCoverPhoto = self.imageForNameCollection
         
