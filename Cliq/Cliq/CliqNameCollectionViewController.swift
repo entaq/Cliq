@@ -5,6 +5,7 @@
 //  Created by Anar Enhsaihan on 7/7/15.
 //  Copyright (c) 2015 Arun Nagarajan. All rights reserved.
 //
+// Provide metadata for your cliq album
 
 import UIKit
 
@@ -34,6 +35,19 @@ class CliqNameCollectionViewController: UIViewController {
     }
     
     func uploadCollection() {
+        
+        // prevent user from interacting with the app during creation of the cliq
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        
+        // superimpose a spinning indicator while the cliq is being created
+        var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50)) as UIActivityIndicatorView
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
+        // TODO: once cliq is created, revert user to home view controller
         
         var cliq = PFObject(className: "CliqAlbum")
         cliq["collectionName"] = nameCollectionTextField.text
@@ -68,11 +82,30 @@ class CliqNameCollectionViewController: UIViewController {
                         if (success) {
                             println("Saved cliq successfully")
                         } else {
+                            
+                            // [Anar] might be nice to let the user know with an alert controller
+                            
                             println(error)
                         }
+                        
+                        // [Anar] allow user inputs again
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                            activityIndicator.stopAnimating()
+                        })
+                        
                     })
                 } else {
+                    
+                    // [Anar] might be a good idea to let user know with an alert controller
+                    
                     println(error)
+                    
+                    // [Anar] allow user inputs again
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                        activityIndicator.stopAnimating()
+                    })
                 }
             })
             
