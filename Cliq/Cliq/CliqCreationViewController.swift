@@ -38,6 +38,10 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     @IBAction func save(sender: AnyObject) {
+        
+        // TODO: [Anar] Don't upload these details
+        // TODO: [Anar] Send either cliq object or the individual details to the CliqNameCollectionViewController
+        
         var cliq = PFObject(className:"CliqAlbum")
         cliq["name"] = place!.name
         cliq["address"] = "\n".join(place!.formattedAddress.componentsSeparatedByString(", "))
@@ -81,23 +85,33 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                 presentImagePickerController(.PhotoLibrary)
                 }, secondaryHandler: { _, numberOfPhotos in
                     controller.getSelectedImagesWithCompletion() { images in
+                        
+                        // [Anar] running a loop on the images that were selected by the user
+                        
                         for image in images {
                             if let image = image {
                                 
-                                // [Anar] Capturing image for subsequent view controller
+                                // [Anar] Capturing image for subsequent view controller, which would be the last image in the iteration
+                                // [Anar] Actually, the first image is always used for the cover photo in the next VC, why??
                                 self.imageForNameCollection = image
                                 
                                 let imageData = UIImageJPEGRepresentation(image, 0.55)
                                 let imageFile = PFFile(name:"image.jpeg", data:imageData)
                                 var userPhoto = PFObject(className:"UserPhoto")
                                 userPhoto["creator"] = PFUser.currentUser()!
+                                
+                                // [Anar] Pointer to cliqGroup is being set on userPhoto in CliqNameCollectionVC
+                                // [Anar] cliqGroup is only set during save operation, that's why this if condition never satisfies since this operation happens before the save operation
                                 if let cliqGroup = self.cliqGroup {
                                     userPhoto["cliqGroup"] = cliqGroup
                                 }
                                 userPhoto["imageFile"] = imageFile
-                                userPhoto.saveInBackground()
+                                userPhoto.saveInBackground() // [Anar] uploading images too early
                             }
                         }
+                        
+                        // TODO: [Anar] pass images to the nameCollectionVC after for loop is done
+
                     }
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in

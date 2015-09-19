@@ -21,6 +21,8 @@ class CliqNameCollectionViewController: UIViewController {
     @IBOutlet weak var customDateTimeSwitch: UISwitch!
     @IBOutlet weak var inviteFriendsAtLocationSwitch: UISwitch!
     
+    var cliqGroup : PFObject?
+    
     var imageForCoverPhoto : UIImage!
     
     override func viewDidLoad() {
