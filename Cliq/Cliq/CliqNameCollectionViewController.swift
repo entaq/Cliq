@@ -79,17 +79,20 @@ class CliqNameCollectionViewController: UIViewController {
                     cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
                     cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
                         
-                        if (success) {
-                            println("Saved cliq successfully")
-                        } else {
-                            
-                            // [Anar] might be nice to let the user know with an alert controller
-                            
-                            println(error)
-                        }
-                        
                         // [Anar] allow user inputs again
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            
+                            if (success) {
+                                println("Saved cliq successfully")
+                                
+                                self.performSegueWithIdentifier("List Cliq Photos", sender: cliq.objectId)
+                            } else {
+                                
+                                // TODO: [Anar] might be nice to let the user know with an alert controller
+                                
+                                println(error)
+                            }
+                            
                             UIApplication.sharedApplication().endIgnoringInteractionEvents()
                             activityIndicator.stopAnimating()
                         })
@@ -97,7 +100,7 @@ class CliqNameCollectionViewController: UIViewController {
                     })
                 } else {
                     
-                    // [Anar] might be a good idea to let user know with an alert controller
+                    // TODO: [Anar] might be a good idea to let user know with an alert controller
                     
                     println(error)
                     
@@ -111,6 +114,14 @@ class CliqNameCollectionViewController: UIViewController {
             
         }
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "List Cliq Photos" {
+            var listCliqPhotosVC = segue.destinationViewController as! CliqListPhotosViewController
+            listCliqPhotosVC.cliqId = sender as! String
+        }
     }
     
 }
