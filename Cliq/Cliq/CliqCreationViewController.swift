@@ -8,29 +8,26 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
     
     var imageForNameCollection : UIImage?
     
-    @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var captionField: UITextField!
-    @IBOutlet weak var nameField: UILabel!
-    @IBOutlet weak var locationField: UILabel!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let place = place {
-            self.place = place
-            if let name = place.name {
-                nameField.text = name
-            }
-            locationField.text = " ".join(place.formattedAddress.componentsSeparatedByString(", "))
-        } else {
-            println("No place selected")
-            println("")
-        }
-
-        let fbid = PFUser.currentUser()?.objectForKey("facebookId") as! String
-        let url = NSURL(string: "https://graph.facebook.com/\(fbid)/picture?type=large")
-        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
-        profilePic.clipsToBounds = true
-        profilePic.sd_setImageWithURL(url)
+//        if let place = place {
+//            self.place = place
+//            if let name = place.name {
+//                nameField.text = name
+//            }
+//            locationField.text = " ".join(place.formattedAddress.componentsSeparatedByString(", "))
+//        } else {
+//            println("No place selected")
+//            println("")
+//        }
+//
+//        let fbid = PFUser.currentUser()?.objectForKey("facebookId") as! String
+//        let url = NSURL(string: "https://graph.facebook.com/\(fbid)/picture?type=large")
+//        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
+//        profilePic.clipsToBounds = true
+//        profilePic.sd_setImageWithURL(url)
+//        
+        self.uploadPhoto()
     }
 
     @IBAction func cancel(sender: AnyObject) {
@@ -45,17 +42,18 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
         var cliq = PFObject(className:"CliqAlbum")
         cliq["name"] = place!.name
         cliq["address"] = "\n".join(place!.formattedAddress.componentsSeparatedByString(", "))
-        cliq["caption"] = self.captionField.text
+        //cliq["caption"] = self.captionField.text
         cliq.saveInBackground()
         cliqGroup = cliq
     }
 
-    @IBAction func uploadPhoto(sender: AnyObject) {
+    
+    func uploadPhoto() {
         let authorization = PHPhotoLibrary.authorizationStatus()
         if authorization == .NotDetermined {
             PHPhotoLibrary.requestAuthorization() { status in
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.uploadPhoto(sender)
+                    self.uploadPhoto()
                 }
             }
             return
