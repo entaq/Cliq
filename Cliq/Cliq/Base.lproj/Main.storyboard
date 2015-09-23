@@ -134,6 +134,7 @@
         <!--Cliq Creation View Controller-->
         <scene sceneID="UsX-jo-CAT">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v2T-aO-Q3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Create Cliq" id="tna-nk-T5a" customClass="CliqCreationViewController" customModule="Cliq" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TZW-a0-KVo"/>
@@ -144,8 +145,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="ieV-YD-52H" kind="show" identifier="applyDetailsSegue" id="W72-ik-1DN"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v2T-aO-Q3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1895" y="293"/>
         </scene>
@@ -161,7 +164,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kh3-XN-Mhe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kh3-XN-Mhe">
                                 <rect key="frame" x="0.0" y="64" width="600" height="267"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name your collection" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Suk-NN-VkA">

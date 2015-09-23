@@ -5,6 +5,7 @@ import Photos
 class CliqCreationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var place: GMSPlace?
     var cliqGroup: PFObject?
+    var userSelectedImages = [PFObject]()
     
     var imageForNameCollection : UIImage?
     
@@ -26,7 +27,7 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
 //        profilePic.layer.cornerRadius = profilePic.frame.size.width/2
 //        profilePic.clipsToBounds = true
 //        profilePic.sd_setImageWithURL(url)
-//        
+//
         self.uploadPhoto()
     }
 
@@ -98,22 +99,31 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                                 var userPhoto = PFObject(className:"UserPhoto")
                                 userPhoto["creator"] = PFUser.currentUser()!
                                 
-                                // [Anar] Pointer to cliqGroup is being set on userPhoto in CliqNameCollectionVC
-                                // [Anar] cliqGroup is only set during save operation, that's why this if condition never satisfies since this operation happens before the save operation
-                                if let cliqGroup = self.cliqGroup {
-                                    userPhoto["cliqGroup"] = cliqGroup
-                                }
                                 userPhoto["imageFile"] = imageFile
-                                userPhoto.saveInBackground() // [Anar] uploading images too early
+                                
+                                // [Anar] save images to an array
+                                self.userSelectedImages.append(userPhoto)
                             }
                         }
                         
-                        // TODO: [Anar] pass images to the nameCollectionVC after for loop is done
+                        // [Anar] create cliq object, ready to sent over to the next vc
+                        var cliq = PFObject(className:"CliqAlbum")
+                        cliq["name"] = self.place!.name
+                        cliq["address"] = "\n".join(self.place!.formattedAddress.componentsSeparatedByString(", "))
+                        self.cliqGroup = cliq
+                        
+                        // [Anar] advance to the next vc
+                        
+                        self.performSegueWithIdentifier("applyDetailsSegue", sender: nil)
 
                     }
             }))
             controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
                 println("Cancelled")
+                
+                // TODO: [Anar] go back to choosing a location
+                
+                self.navigationController?.popViewControllerAnimated(true)
             }))
             
             presentViewController(controller, animated: true, completion: nil)
@@ -135,6 +145,8 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
         var nameCollectionVC : CliqNameCollectionViewController = segue.destinationViewController as! CliqNameCollectionViewController
         
         nameCollectionVC.imageForCoverPhoto = self.imageForNameCollection
+        nameCollectionVC.cliqGroup = self.cliqGroup
+        nameCollectionVC.userPhotos = self.userSelectedImages
         
     }
 }

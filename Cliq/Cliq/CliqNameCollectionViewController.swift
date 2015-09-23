@@ -25,6 +25,8 @@ class CliqNameCollectionViewController: UIViewController {
     
     var imageForCoverPhoto : UIImage!
     
+    var userPhotos = [PFObject]()
+    
     override func viewDidLoad() {
         
         coverPhotoImageView.image = imageForCoverPhoto
