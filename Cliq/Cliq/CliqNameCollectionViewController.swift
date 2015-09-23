@@ -53,7 +53,7 @@ class CliqNameCollectionViewController: UIViewController {
         
         // TODO: once cliq is created, revert user to home view controller
         
-        var cliq = PFObject(className: "CliqAlbum")
+        var cliq = self.cliqGroup!
         cliq["collectionName"] = nameCollectionTextField.text
         cliq["description"] = descriptionTextField.text
         cliq["private"] = privateCollectionSwitch.on
