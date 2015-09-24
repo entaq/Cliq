@@ -39,7 +39,7 @@ class CliqNameCollectionViewController: UIViewController {
         nameCollectionTextField.attributedPlaceholder = NSAttributedString(string: "Name your collection", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
         descriptionTextField.attributedPlaceholder = NSAttributedString(string: "Give a short description if you like", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
     }
-        
+    
     // [Question to Arun] Should the argument be optional?
     func uploadCliqWithCoverPhoto(userPhoto: PFObject) {
         
@@ -84,6 +84,7 @@ class CliqNameCollectionViewController: UIViewController {
     
     func uploadPhotos() {
         
+        // [Anar] stop gap measure to prevent multiple uploads of cliq until we find a way to just use the photo the user selected as a cover
         let lastPhoto = userPhotos.last
         
         for userPhoto in userPhotos {

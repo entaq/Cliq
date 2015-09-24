@@ -94,6 +94,8 @@ class CliqCreationViewController: UIViewController, UIImagePickerControllerDeleg
                                 // [Anar] Actually, the first image is always used for the cover photo in the next VC, why??
                                 self.imageForNameCollection = image
                                 
+                                // TODO: [Anar] need to decide if we want to select an image or a userPhoto object to send to next VC's cover photo attribute
+                                
                                 let imageData = UIImageJPEGRepresentation(image, 0.55)
                                 let imageFile = PFFile(name:"image.jpeg", data:imageData)
                                 var userPhoto = PFObject(className:"UserPhoto")
