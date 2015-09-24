@@ -32,7 +32,7 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
         
         //query all the user photos that belong to the cliqAlbum which the user originally selected from the home controller
         
-        var query = PFQuery(className: "UserPhoto")
+        let query = PFQuery(className: "UserPhoto")
         query.whereKey("cliqGroup", equalTo: PFObject(withoutDataWithClassName: "CliqAlbum", objectId: cliqId))
         
         query.orderByDescending("createdAt")
@@ -44,13 +44,13 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
                 if let objects = objects as? [PFObject] {
                     self.photos = objects
                     
-                    println(self.photos.count)
+                    print(self.photos.count)
                     
                     self.collectionView.reloadData()
                 }
             } else {
                
-                println(error?.description)
+                print(error?.description)
             }
         }
         
@@ -65,7 +65,7 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCell", forIndexPath: indexPath) as! CliqCollectionViewCell
         
         let userPhoto = photos[indexPath.row] as PFObject
         
