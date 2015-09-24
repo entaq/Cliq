@@ -40,17 +40,55 @@ class CliqNameCollectionViewController: UIViewController {
         descriptionTextField.attributedPlaceholder = NSAttributedString(string: "Give a short description if you like", attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
     }
     
+    // create function upload cliq, which should take an argument (photo) which should be the photo that was chosen for the cover photo
+    
+    func uploadCliq(userPhoto: PFObject) {
+        
+        let user = PFUser.currentUser()! as PFObject
+        
+        var cliq = self.cliqGroup!
+        
+        cliq["facebookId"] = user["facebookId"]
+        cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the last userPhoto that was just created
+        cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
+            
+            // [Anar] allow user inputs again
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if (success) {
+                    println("Saved cliq successfully")
+                    
+                    // [Anar] pop to home, and then advance to list photos VC
+                    
+                    var listPhotosVC : CliqListPhotosViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListPhotosVC") as! CliqListPhotosViewController
+                    listPhotosVC.cliqId = cliq.objectId!
+                    
+                    if let navController : UINavigationController = self.navigationController {
+                        navController.popToRootViewControllerAnimated(false)
+                        navController.pushViewController(listPhotosVC, animated: false) // [Anar] play around with true/false to your liking
+                    }
+                    
+                    
+                } else {
+                    
+                    // TODO: [Anar] might be nice to let the user know with an alert controller
+                    
+                    println(error)
+                }
+                
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                self.activityIndicator!.stopAnimating()
+            })
+            
+        })
+    }
+    
     func uploadPhotos() {
         
         for userPhoto in userPhotos {
             
-//            let imageData = UIImageJPEGRepresentation(image, 0.55)
-//            let imageFile = PFFile(name: "image.jpeg", data: imageData)
-            
             let user = PFUser.currentUser()! as PFObject
-            
-            
-            // TODO: [Anar] give each photo the cliqAlbum to which it belongs
+
             var cliq = self.cliqGroup!
             
             userPhoto["creator"] = PFUser.currentUser()
@@ -59,39 +97,43 @@ class CliqNameCollectionViewController: UIViewController {
                 if (success) {
                     println("Saved photo successfully")
                     
-                    cliq["facebookId"] = user["facebookId"]
-                    cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
-                    cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
-                        
-                        // [Anar] allow user inputs again
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            
-                            if (success) {
-                                println("Saved cliq successfully")
-                                
-                                // [Anar] pop to home, and then advance to list photos VC
-                                
-                                var listPhotosVC : CliqListPhotosViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListPhotosVC") as! CliqListPhotosViewController
-                                listPhotosVC.cliqId = cliq.objectId!
-                                
-                                if let navController : UINavigationController = self.navigationController {
-                                    navController.popToRootViewControllerAnimated(false)
-                                    navController.pushViewController(listPhotosVC, animated: false) // [Anar] play around with true/false to your liking
-                                }
-                                
-                                
-                            } else {
-                                
-                                // TODO: [Anar] might be nice to let the user know with an alert controller
-                                
-                                println(error)
-                            }
-                            
-                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
-                            self.activityIndicator!.stopAnimating()
-                        })
-                        
-                    })
+                    // you should only only have to save the cliq once the last photo has been saved
+                    
+                    self.uploadCliq(userPhoto)
+                    
+//                    cliq["facebookId"] = user["facebookId"]
+//                    cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the last userPhoto that was just created
+//                    cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
+//                        
+//                        // [Anar] allow user inputs again
+//                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                            
+//                            if (success) {
+//                                println("Saved cliq successfully")
+//                                
+//                                // [Anar] pop to home, and then advance to list photos VC
+//                                
+//                                var listPhotosVC : CliqListPhotosViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListPhotosVC") as! CliqListPhotosViewController
+//                                listPhotosVC.cliqId = cliq.objectId!
+//                                
+//                                if let navController : UINavigationController = self.navigationController {
+//                                    navController.popToRootViewControllerAnimated(false)
+//                                    navController.pushViewController(listPhotosVC, animated: false) // [Anar] play around with true/false to your liking
+//                                }
+//                                
+//                                
+//                            } else {
+//                                
+//                                // TODO: [Anar] might be nice to let the user know with an alert controller
+//                                
+//                                println(error)
+//                            }
+//                            
+//                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+//                            self.activityIndicator!.stopAnimating()
+//                        })
+//                        
+//                    })
                 } else {
                     
                     // TODO: [Anar] might be a good idea to let user know with an alert controller
@@ -132,71 +174,6 @@ class CliqNameCollectionViewController: UIViewController {
         cliq.saveInBackground()
         
         uploadPhotos()
-        
-        // [Anar] Upload photo and associated data to Parse
-        
-//        var userPhoto : PFObject
-//        
-//        if let image = imageForCoverPhoto {
-//            let imageData = UIImageJPEGRepresentation(image, 0.55)
-//            let imageFile = PFFile(name: "image.jpeg", data: imageData)
-//            userPhoto = PFObject(className: "UserPhoto")
-//            
-//            let user = PFUser.currentUser()! as PFObject
-//            
-//            userPhoto["creator"] = PFUser.currentUser()
-//            userPhoto["cliqGroup"] = cliq // [Anar] Pointer to the cliqGroup to which the photo belongs
-//            userPhoto["imageFile"] = imageFile // [Anar] Save as binary on Parse
-//            userPhoto.saveInBackgroundWithBlock({ (success, error) -> Void in
-//                if (success) {
-//                    println("Saved photo successfully")
-//                    
-//                    cliq["facebookId"] = user["facebookId"]
-//                    cliq["coverPhoto"] = userPhoto // [Anar] Pointer to the photo that was just created
-//                    cliq.saveInBackgroundWithBlock({ (success, error) -> Void in
-//                        
-//                        // [Anar] allow user inputs again
-//                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                            
-//                            if (success) {
-//                                println("Saved cliq successfully")
-//                                
-//                                // [Anar] pop to home, and then advance to list photos VC
-//                                
-//                                var listPhotosVC : CliqListPhotosViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ListPhotosVC") as! CliqListPhotosViewController
-//                                listPhotosVC.cliqId = cliq.objectId!
-//                                
-//                                let navController : UINavigationController = self.navigationController!
-//                                navController.popToRootViewControllerAnimated(false)
-//                                navController.pushViewController(listPhotosVC, animated: false) // [Anar] play around with true/false to your liking
-//                                
-//                            } else {
-//                                
-//                                // TODO: [Anar] might be nice to let the user know with an alert controller
-//                                
-//                                println(error)
-//                            }
-//                            
-//                            UIApplication.sharedApplication().endIgnoringInteractionEvents()
-//                            activityIndicator.stopAnimating()
-//                        })
-//                        
-//                    })
-//                } else {
-//                    
-//                    // TODO: [Anar] might be a good idea to let user know with an alert controller
-//                    
-//                    println(error)
-//                    
-//                    // [Anar] allow user inputs again
-//                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//                        UIApplication.sharedApplication().endIgnoringInteractionEvents()
-//                        activityIndicator.stopAnimating()
-//                    })
-//                }
-//            })
-//            
-//        }
         
     }
     
