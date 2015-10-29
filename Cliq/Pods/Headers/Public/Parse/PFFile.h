@@ -1,1 +1,1 @@
-../../../Parse/Parse.framework/Headers/PFFile.h
+../../../Parse/Parse/PFFile.h

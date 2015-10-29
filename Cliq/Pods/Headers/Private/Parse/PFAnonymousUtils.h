@@ -1,1 +1,1 @@
-../../../Parse/Parse.framework/Headers/PFAnonymousUtils.h
+../../../Parse/Parse/PFAnonymousUtils.h

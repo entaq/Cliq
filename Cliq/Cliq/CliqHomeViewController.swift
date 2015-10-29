@@ -63,7 +63,7 @@ class CliqHomeViewController : UIViewController, PFLogInViewControllerDelegate, 
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
             if error == nil {
-                if let objects = objects as? [PFObject] {
+                if let objects = objects as [PFObject]! {
                     self.photos = objects
                     self.collectionView.reloadData()
                 }

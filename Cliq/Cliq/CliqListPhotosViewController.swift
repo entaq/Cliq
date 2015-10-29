@@ -41,7 +41,7 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
             if error == nil {
-                if let objects = objects as? [PFObject] {
+                if let objects = objects as [PFObject]! {
                     self.photos = objects
                     
                     print(self.photos.count)

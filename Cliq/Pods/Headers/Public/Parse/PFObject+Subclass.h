@@ -1,1 +1,1 @@
-../../../Parse/Parse.framework/Headers/PFObject+Subclass.h
+../../../Parse/Parse/PFObject+Subclass.h
