@@ -33,7 +33,7 @@ class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource
         //query all the user photos that belong to the cliqAlbum which the user originally selected from the home controller
         
         let query = PFQuery(className: "UserPhoto")
-        query.whereKey("cliqGroup", equalTo: PFObject(withoutDataWithClassName: "CliqAlbum", objectId: cliqId))
+        query.whereKey("cliqGroup", equalTo: PFObject(outDataWithClassName: "CliqAlbum", objectId: cliqId))
         
         query.orderByDescending("createdAt")
         query.includeKey("creator")
