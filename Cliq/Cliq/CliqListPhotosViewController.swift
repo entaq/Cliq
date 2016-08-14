@@ -1,11 +1,3 @@
-//
-//  CliqListPhotosViewController.swift
-//  Cliq
-//
-//  Created by Anar Enhsaihan on 9/2/15.
-//  Copyright (c) 2015 Arun Nagarajan. All rights reserved.
-//
-
 import UIKit
 
 class CliqListPhotosViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
